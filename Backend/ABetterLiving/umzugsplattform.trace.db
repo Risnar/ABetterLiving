@@ -262,3 +262,11 @@ alter table lists alter column LISTID not null auto_increment [50004-197]
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.lang.Thread.run(Thread.java:745)
+2018-07-03 15:21:16 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax Fehler in SQL Befehl "SELECT * FROM ABETTERLIVING.USERS ABETTERLIVING.[*]TASKS_USERS"
+Syntax error in SQL statement "SELECT * FROM ABETTERLIVING.USERS ABETTERLIVING.[*]TASKS_USERS"; SQL statement:
+SELECT * FROM ABETTERLIVING.USERS ABETTERLIVING.TASKS_USERS [42000-197]
+2018-07-03 15:21:46 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax Fehler in SQL Befehl "SELECT * FROM ABETTERLIVING.USERS ABETTERLIVING.[*]USERS"
+Syntax error in SQL statement "SELECT * FROM ABETTERLIVING.USERS ABETTERLIVING.[*]USERS"; SQL statement:
+SELECT * FROM ABETTERLIVING.USERS ABETTERLIVING.USERS [42000-197]

@@ -14,6 +14,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
@@ -24,15 +25,21 @@ public class TaskService {
     private TaskRepository taskRepository;
 
     @GET
-    @Path("/a")
+    @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<String> getTasksByUserID() {
-        List<String> resList = new ArrayList<String>();
-        /*for (Tasks t : taskRepository.findAll()) {
+    public List<Tasks> getAllTasks() {
+        List<Tasks> resList = new ArrayList<>();
+        for (Tasks t : taskRepository.findAll()) {
             resList.add(t);
-        }*/
-        resList.add("hey gay");
+        }
         return resList;
+    }
+
+    @GET
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Tasks getTasksByID(@PathParam("id") int id) {
+        return taskRepository.findById(Long.valueOf(id)).get();
     }
 
 }
