@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Home</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list *ngFor="let list for lists">
+    <ion-list-header>Heute</ion-list-header>
+    <button ion-item *ngFor="let item of list.items" (click)="itemTapped($event, item)">
+      <ion-icon name="md-help" item-start></ion-icon>
+      <h2><{{item.title}}</h2>
+      <p>My eyeballs could have been sucked from their sockets!</p>
+      <ion-note item-end>1:12 pm</ion-note>
+    </button>
+  </ion-list>
+</ion-content>

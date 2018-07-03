@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<jpa:entity-mappings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:java="http://jcp.org/en/jsr/detail?id=270" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jpa="http://java.sun.com/xml/ns/persistence/orm" ptype="MONOLITH" ppkg="ch.zhaw.mobileeng.abetterliving" epkg="domain" v="4.9" rws="_15305418316842" Pws="_15305418316842" cws="_15305418316842" persistenceUnitName="DEFAULT_PU" sm="false" xs="false" id="_15305418316831" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_1.xsd">
+    <jpa:entity compositePrimaryKeyClass="UsersPK" abs="false" class="Users" v="true" xre="false" m="false" rootElement="_15305418316831" id="_15305418951463">
+        <jpa:ath>Raphael Fuchs</jpa:ath>
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" v="true" xvt="" name="Username" id="_15305419308256">
+                <jpa:xwm/>
+                <jpa:xm/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" v="true" xvt="" name="Email" id="_15305419365457">
+                <jpa:xwm/>
+                <jpa:xm/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" v="true" xvt="" name="Password" id="_15305421331613">
+                <jpa:xwm/>
+                <jpa:xm/>
+            </jpa:basic>
+            <jpa:many-to-many collection-type="java.util.List" cit="java.util.ArrayList" connected-entity-id="_15305421390054" connected-attribute-id="_153054249226625" v="true" name="taskses" id="_153054249226926"/>
+            <jpa:id attribute-type="Long" v="true" xvt="" name="UserID" id="_15305418951934">
+                <jpa:xwm/>
+                <jpa:xm/>
+                <jpa:generated-value strategy="AUTO"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="Userses.findAll">
+            <jpa:query>Select e from Userses e</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="User.findByUsername">
+            <jpa:query>Select u from Userses u where u.Username=:Username</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Userses.findByEmail">
+            <jpa:query>Select u from Userses u where u.Email=:Email</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Userses.findByPassword">
+            <jpa:query>Select u from Userses u where u.Password=:Password</jpa:query>
+        </jpa:nq>
+        <jpa:table name="USERS"/>
+    </jpa:entity>
+    <jpa:entity compositePrimaryKeyClass="TasksPK" abs="false" class="Tasks" v="true" xre="false" m="false" rootElement="_15305418316831" id="_15305421390054">
+        <jpa:ath>Raphael Fuchs</jpa:ath>
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" v="true" xvt="" name="Title" id="_15305421740747">
+                <jpa:xwm/>
+                <jpa:xm/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" v="true" xvt="" name="Note" id="_15305421778358">
+                <jpa:xwm/>
+                <jpa:xm/>
+            </jpa:basic>
+            <jpa:basic attribute-type="Integer" v="true" xvt="" name="Priority" id="_153054222676614">
+                <jpa:xwm/>
+                <jpa:xm/>
+            </jpa:basic>
+            <jpa:basic attribute-type="java.time.LocalTime" v="true" xvt="" name="RequiredTime" id="_15305421820179">
+                <jpa:xwm/>
+                <jpa:xm/>
+            </jpa:basic>
+            <jpa:basic attribute-type="java.time.LocalDateTime" v="true" xvt="" name="DueDate" id="_153054219309110">
+                <jpa:xwm/>
+                <jpa:xm/>
+            </jpa:basic>
+            <jpa:basic attribute-type="java.time.LocalDateTime" v="true" xvt="" name="CreationDate" id="_153054220038211">
+                <jpa:xwm/>
+                <jpa:xm/>
+            </jpa:basic>
+            <jpa:basic attribute-type="Integer" v="true" xvt="" name="Status" id="_153054221210812">
+                <jpa:xwm/>
+                <jpa:xm/>
+            </jpa:basic>
+            <jpa:many-to-one optional="true" primaryKey="false" connected-entity-id="_153054235568815" v="true" xvt="" name="list" id="_153054246961221">
+                <jpa:xwm/>
+                <jpa:xm/>
+            </jpa:many-to-one>
+            <jpa:many-to-one primaryKey="false" connected-entity-id="_15305418951463" v="true" xvt="" name="owner" id="_153054254853364">
+                <jpa:xwm/>
+                <jpa:xm/>
+            </jpa:many-to-one>
+            <jpa:many-to-one optional="true" primaryKey="false" connected-entity-id="_153054235568815" v="true" xvt="" name="project" id="_153060251834311">
+                <jpa:xwm/>
+                <jpa:xm/>
+                <jpa:join-column name="PROJECT_LISTID" unique="false" nullable="false" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:many-to-many own="true" collection-type="java.util.List" cit="java.util.ArrayList" connected-entity-id="_15305418951463" connected-attribute-id="_153054249226926" v="true" xvt="" name="userses" id="_153054249226625">
+                <jpa:xwm/>
+                <jpa:xm/>
+                <jpa:join-table name="TASKS_USERS">
+                    <jpa:inverse-join-column name="USERSES_USERID" unique="false" nullable="true" insertable="true" updatable="true"/>
+                </jpa:join-table>
+            </jpa:many-to-many>
+            <jpa:id attribute-type="Long" v="true" xvt="" name="TaskID" id="_15305421390095">
+                <jpa:xwm/>
+                <jpa:xm/>
+                <jpa:column name="TASKID" unique="false" nullable="true" insertable="true" updatable="true"/>
+                <jpa:generated-value strategy="AUTO"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="Taskses.findAll">
+            <jpa:query>Select e from Taskses e</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Taskses.findByTitle">
+            <jpa:query>Select t from Taskses t where t.Title=:Title</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Taskses.findByNote">
+            <jpa:query>Select t from Taskses t where t.Note=:Note</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Taskses.findByRequiredTime">
+            <jpa:query>Select t from Taskses t where t.RequiredTime=:RequiredTime</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Taskses.findByDueDate">
+            <jpa:query>Select t from Taskses t where t.DueDate=:DueDate</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Taskses.findByCreationDate">
+            <jpa:query>Select t from Taskses t where t.CreationDate=:CreationDate</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Taskses.findByStatus">
+            <jpa:query>Select t from Taskses t where t.Status=:Status</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Taskses.findByListID">
+            <jpa:query>Select t from Taskses t where t.ListID=:ListID</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Taskses.findByPriority">
+            <jpa:query>Select t from Taskses t where t.Priority=:Priority</jpa:query>
+        </jpa:nq>
+        <jpa:table name="TASKS"/>
+    </jpa:entity>
+    <jpa:entity compositePrimaryKeyClass="ListsPK" abs="false" class="Lists" v="true" xre="false" m="false" rootElement="_15305418316831" id="_153054235568815">
+        <jpa:ath>Raphael Fuchs</jpa:ath>
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" v="true" name="Type" id="_153054237055818"/>
+            <jpa:basic attribute-type="String" v="true" xvt="" name="Name" id="_153054237369419">
+                <jpa:xwm/>
+                <jpa:xm/>
+            </jpa:basic>
+            <jpa:many-to-one optional="true" primaryKey="false" connected-entity-id="_15305418951463" v="true" xvt="" name="user" id="_153060271703616">
+                <jpa:xwm/>
+                <jpa:xm/>
+            </jpa:many-to-one>
+            <jpa:id attribute-type="Long" v="true" xvt="" name="ListID" id="_153054235568816">
+                <jpa:xwm/>
+                <jpa:xm/>
+                <jpa:generated-value strategy="AUTO"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="Listses.findAll">
+            <jpa:query>Select e from Listses e</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Listses.findByType">
+            <jpa:query>Select l from Listses l where l.Type=:Type</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Listses.findByName">
+            <jpa:query>Select l from Listses l where l.Name=:Name</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Lists.findByAttribute">
+            <jpa:query>Select l from Lists l where l.attribute=:attribute</jpa:query>
+        </jpa:nq>
+        <jpa:table name="LISTS"/>
+    </jpa:entity>
+    <jpa:snp loc="BEFORE_PACKAGE" e="true">/**
+ * This file was generated by the Jeddict
+ */</jpa:snp>
+    <jpa:c>
+        <ct>java.util.List</ct>
+        <ct>java.util.Set</ct>
+        <ct>java.util.Map</ct>
+        <ct>java.util.Collection</ct>
+        <cit>java.util.ArrayList</cit>
+        <cit>java.util.LinkedList</cit>
+        <cit>java.util.HashSet</cit>
+        <cit>java.util.TreeSet</cit>
+        <cit>java.util.HashMap</cit>
+        <db u="jdbc:derby://localhost:1527/sample" n="app" p="app" d="org.apache.derby.jdbc.ClientDriver"/>
+    </jpa:c>
+    <jpa:wsl>
+        <jpa:ws n="Main" id="_15305418316842">
+            <i ref="_15305418951463" x="150" y="94"/>
+            <i ref="_15305421390054" x="805" y="110"/>
+            <i ref="_153054235568815" x="552" y="496"/>
+        </jpa:ws>
+    </jpa:wsl>
+</jpa:entity-mappings>
