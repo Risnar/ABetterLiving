@@ -3,9 +3,7 @@
  */
 package ch.zhaw.mobileeng.abetterliving.model;
 
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -18,12 +16,13 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import lombok.Data;
 
 /**
  * @author Raphael Fuchs
  */
-
 @Data
 @Entity
 @Table(name = "TASKS")
@@ -44,13 +43,16 @@ public class Tasks {
     private Integer Priority;
 
     @Basic
-    private LocalTime RequiredTime;
+    @Temporal(TemporalType.TIME)
+    private Date RequiredTime;
 
     @Basic
-    private LocalDateTime DueDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date DueDate;
 
     @Basic
-    private LocalDateTime CreationDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date CreationDate;
 
     @Basic
     private Integer Status;
@@ -62,7 +64,7 @@ public class Tasks {
     private Users owner;
 
     @ManyToOne
-    @JoinColumn(name = "PROJECT_LISTID", nullable = false)
+    @JoinColumn(name = "PROJECT_LISTID")
     private Lists project;
 
     @ManyToMany
@@ -178,5 +180,4 @@ public class Tasks {
         getUserses().remove(userse);
         userse.getTaskses().remove(this);
     }*/
-
 }

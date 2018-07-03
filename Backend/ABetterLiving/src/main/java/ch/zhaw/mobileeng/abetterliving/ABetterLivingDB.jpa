@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <jpa:entity-mappings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:java="http://jcp.org/en/jsr/detail?id=270" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jpa="http://java.sun.com/xml/ns/persistence/orm" ptype="MONOLITH" ppkg="ch.zhaw.mobileeng.abetterliving" epkg="domain" v="4.9" rws="_15305418316842" Pws="_15305418316842" cws="_15305418316842" persistenceUnitName="DEFAULT_PU" sm="false" xs="false" id="_15305418316831" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_1.xsd">
-    <jpa:entity compositePrimaryKeyClass="UsersPK" abs="false" class="Users" v="true" xre="false" m="false" rootElement="_15305418316831" id="_15305418951463">
+    <jpa:entity compositePrimaryKeyClass="UsersPK" abs="false" class="Users" v="true" jbn="false" xre="false" m="false" rootElement="_15305418316831" id="_15305418951463">
         <jpa:ath>Raphael Fuchs</jpa:ath>
         <jpa:attributes>
             <jpa:basic attribute-type="String" v="true" xvt="" name="Username" id="_15305419308256">
@@ -15,7 +15,10 @@
                 <jpa:xwm/>
                 <jpa:xm/>
             </jpa:basic>
-            <jpa:many-to-many collection-type="java.util.List" cit="java.util.ArrayList" connected-entity-id="_15305421390054" connected-attribute-id="_153054249226625" v="true" name="taskses" id="_153054249226926"/>
+            <jpa:many-to-many collection-type="java.util.List" cit="java.util.ArrayList" connected-entity-id="_15305421390054" connected-attribute-id="_153054249226625" v="true" xvt="" name="taskses" id="_153054249226926">
+                <jpa:xwm/>
+                <jpa:xm/>
+            </jpa:many-to-many>
             <jpa:id attribute-type="Long" v="true" xvt="" name="UserID" id="_15305418951934">
                 <jpa:xwm/>
                 <jpa:xm/>
@@ -36,7 +39,7 @@
         </jpa:nq>
         <jpa:table name="USERS"/>
     </jpa:entity>
-    <jpa:entity compositePrimaryKeyClass="TasksPK" abs="false" class="Tasks" v="true" xre="false" m="false" rootElement="_15305418316831" id="_15305421390054">
+    <jpa:entity compositePrimaryKeyClass="TasksPK" abs="false" class="Tasks" v="true" jbn="false" xre="false" m="false" rootElement="_15305418316831" id="_15305421390054">
         <jpa:ath>Raphael Fuchs</jpa:ath>
         <jpa:attributes>
             <jpa:basic attribute-type="String" v="true" xvt="" name="Title" id="_15305421740747">
@@ -51,15 +54,15 @@
                 <jpa:xwm/>
                 <jpa:xm/>
             </jpa:basic>
-            <jpa:basic attribute-type="java.time.LocalTime" v="true" xvt="" name="RequiredTime" id="_15305421820179">
+            <jpa:basic attribute-type="java.sql.Time" v="true" xvt="" name="RequiredTime" id="_15305421820179">
                 <jpa:xwm/>
                 <jpa:xm/>
             </jpa:basic>
-            <jpa:basic attribute-type="java.time.LocalDateTime" v="true" xvt="" name="DueDate" id="_153054219309110">
+            <jpa:basic attribute-type="java.sql.Timestamp" v="true" xvt="" name="DueDate" id="_153054219309110">
                 <jpa:xwm/>
                 <jpa:xm/>
             </jpa:basic>
-            <jpa:basic attribute-type="java.time.LocalDateTime" v="true" xvt="" name="CreationDate" id="_153054220038211">
+            <jpa:basic attribute-type="java.sql.Timestamp" v="true" xvt="" name="CreationDate" id="_153054220038211">
                 <jpa:xwm/>
                 <jpa:xm/>
             </jpa:basic>
@@ -71,14 +74,14 @@
                 <jpa:xwm/>
                 <jpa:xm/>
             </jpa:many-to-one>
-            <jpa:many-to-one primaryKey="false" connected-entity-id="_15305418951463" v="true" xvt="" name="owner" id="_153054254853364">
+            <jpa:many-to-one optional="true" primaryKey="false" connected-entity-id="_15305418951463" v="true" xvt="" name="owner" id="_153054254853364">
                 <jpa:xwm/>
                 <jpa:xm/>
             </jpa:many-to-one>
             <jpa:many-to-one optional="true" primaryKey="false" connected-entity-id="_153054235568815" v="true" xvt="" name="project" id="_153060251834311">
                 <jpa:xwm/>
                 <jpa:xm/>
-                <jpa:join-column name="PROJECT_LISTID" unique="false" nullable="false" insertable="true" updatable="true"/>
+                <jpa:join-column name="PROJECT_LISTID" unique="false" nullable="true" insertable="true" updatable="true"/>
             </jpa:many-to-one>
             <jpa:many-to-many own="true" collection-type="java.util.List" cit="java.util.ArrayList" connected-entity-id="_15305418951463" connected-attribute-id="_153054249226926" v="true" xvt="" name="userses" id="_153054249226625">
                 <jpa:xwm/>
@@ -123,10 +126,13 @@
         </jpa:nq>
         <jpa:table name="TASKS"/>
     </jpa:entity>
-    <jpa:entity compositePrimaryKeyClass="ListsPK" abs="false" class="Lists" v="true" xre="false" m="false" rootElement="_15305418316831" id="_153054235568815">
+    <jpa:entity compositePrimaryKeyClass="ListsPK" abs="false" class="Lists" v="true" jbn="false" xre="false" m="false" rootElement="_15305418316831" id="_153054235568815">
         <jpa:ath>Raphael Fuchs</jpa:ath>
         <jpa:attributes>
-            <jpa:basic attribute-type="String" v="true" name="Type" id="_153054237055818"/>
+            <jpa:basic attribute-type="String" v="true" xvt="" name="Type" id="_153054237055818">
+                <jpa:xwm/>
+                <jpa:xm/>
+            </jpa:basic>
             <jpa:basic attribute-type="String" v="true" xvt="" name="Name" id="_153054237369419">
                 <jpa:xwm/>
                 <jpa:xm/>
@@ -172,7 +178,7 @@
     </jpa:c>
     <jpa:wsl>
         <jpa:ws n="Main" id="_15305418316842">
-            <i ref="_15305418951463" x="150" y="94"/>
+            <i ref="_15305418951463" x="151" y="73"/>
             <i ref="_15305421390054" x="805" y="110"/>
             <i ref="_153054235568815" x="552" y="496"/>
         </jpa:ws>
