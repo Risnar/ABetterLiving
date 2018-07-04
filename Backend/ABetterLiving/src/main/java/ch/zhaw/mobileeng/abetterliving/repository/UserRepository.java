@@ -6,8 +6,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 public interface UserRepository extends CrudRepository<Users, Object> {
-    
-    @Query("select * from Users where Username = ?1 limit 1;")
-    public Users findUserByUsername (String username);
+
+    @Query("SELECT u FROM Users u where u.Username = :username")
+    public Users findUserByUsername(String username);
 
 }

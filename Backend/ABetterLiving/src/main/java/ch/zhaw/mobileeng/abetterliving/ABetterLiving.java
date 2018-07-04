@@ -22,6 +22,7 @@ import org.springframework.context.annotation.Configuration;
 import org.h2.server.web.WebServlet;
 import org.springframework.beans.factory.annotation.Autowired;
 
+@Configuration
 @SpringBootApplication
 public class ABetterLiving extends ResourceConfig {
 
@@ -33,7 +34,9 @@ public class ABetterLiving extends ResourceConfig {
         property(ServerProperties.RESPONSE_SET_STATUS_OVER_SEND_ERROR, true);
         register(CorsFilter.class);
         register(TaskService.class);
+        register(ListService.class);
         register(UserService.class);
+        register(AuthenticationService.class);
         register(JacksonHibernateConfig.class);
     }
 
