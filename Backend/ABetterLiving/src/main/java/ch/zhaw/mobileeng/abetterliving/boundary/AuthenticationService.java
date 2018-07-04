@@ -41,11 +41,8 @@ public class AuthenticationService {
 
             if (user == null) {
                 System.out.print("User not found");
-
-                // This shouldn't be reachable anyway as login() sould be protected
-                // by HTTP-Basic authorization. Hence if successful, we should have
-                // a valid user object here.
                 Response.status(Response.Status.UNAUTHORIZED).build();
+                //return ResponseHandler.response("Login status", "Login unsuccessful for user " + user.getUsername(), "login", false, null);
             }
             System.out.print("User found");
             AuthorizationToken token = jwtUtility.generate(authentication);
