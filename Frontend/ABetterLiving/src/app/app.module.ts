@@ -8,8 +8,10 @@ import { LoginPage } from '../pages/login/login';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { AuthService } from '../providers/auth-service/auth-service';
 import { TaskProvider } from '../providers/task/task';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { LoginProvider } from '../providers/login/login';
+import { JWTInterceptor } from '../security/jwtInterceptor';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,7 @@ import { TaskProvider } from '../providers/task/task';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
@@ -30,9 +33,14 @@ import { TaskProvider } from '../providers/task/task';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AuthService,
-    TaskProvider
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    TaskProvider,
+    LoginProvider,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JWTInterceptor,
+      multi: true
+    }
   ]
 })
-export class AppModule {}
+export class AppModule { }
