@@ -12,8 +12,8 @@ import { TaskProvider } from '../../providers/task/task';
 export class HomePage implements OnInit {
 
   private tasks: Array<Task> = [];
-  private username = '';
-  private email = '';
+  username = '';
+  email = '';
 
   constructor(private nav: NavController, private auth: AuthService, private taskProvider: TaskProvider) {
     let info = this.auth.getUserInfo();
