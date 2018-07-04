@@ -6,6 +6,7 @@ package ch.zhaw.mobileeng.abetterliving.model;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,6 +29,7 @@ public class Users {
     private Long UserID;
 
     @Basic
+    //@Column(unique=true)
     private String Username;
 
     @Basic
