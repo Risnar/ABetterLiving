@@ -10,7 +10,7 @@ import { TaskProvider } from '../../providers/task/task';
 })
 export class HomePage implements OnInit {
 
-  private tasks: Array<Task> = []; 
+  private tasks: Array<Task> = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private taskProvider: TaskProvider) {
 
@@ -22,15 +22,8 @@ export class HomePage implements OnInit {
 
   getUnassignedTasks(): void {
     this.taskProvider.getUnassignedTasks().subscribe( tasks => {
-      console.log(this.taskProvider);
-      console.log(this.taskProvider.getUnassignedTasks());
-      alert(this.taskProvider);
-      this.tasks = tasks;
-      
+      this.tasks = tasks;      
     });
-    console.log(this.tasks.length+'Länge der Tasks');
-    alert(this.tasks.length+'Länge der Tasks');
-
   }
 
   ionViewDidLoad() {

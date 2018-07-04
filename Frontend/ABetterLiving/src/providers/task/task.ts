@@ -35,7 +35,7 @@ export class TaskProvider {
  
   // DELETE /task/{id}
   deleteTask (task: Task | number): Observable<Task> {
-    const id = typeof task === 'number' ? task : task.TaskID;
+    const id = typeof task === 'number' ? task : task.taskID;
     const url = `${this.tasksUrl}/${id}`;
     return this.http.delete<Task>(url, httpOptions);
   }
