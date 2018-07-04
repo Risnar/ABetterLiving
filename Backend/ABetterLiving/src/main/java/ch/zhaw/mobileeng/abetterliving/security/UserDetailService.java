@@ -51,7 +51,7 @@ public class UserDetailService implements UserDetailsService {
         roles.add("user");
         List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(roles.stream().toArray(String[]::new));
 
-        User user = new User(userAccount.getPassword(), userAccount.getPassword(), authorities);
+        User user = new User(userAccount.getUsername(), userAccount.getPassword(), authorities);
         return user;
 
     }

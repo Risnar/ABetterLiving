@@ -9,6 +9,7 @@ import ch.zhaw.mobileeng.abetterliving.model.Users;
 import ch.zhaw.mobileeng.abetterliving.repository.UserRepository;
 import ch.zhaw.mobileeng.abetterliving.security.JWTUtility;
 import ch.zhaw.mobileeng.abetterliving.dto.AuthorizationToken;
+import java.util.HashMap;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -18,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 @Path("/login")
@@ -32,21 +34,18 @@ public class AuthenticationService {
     @GET
     @CrossOrigin
     @Produces(MediaType.APPLICATION_JSON)
-    public Response login() {
-
+    public Object login() {
         try {
             SecurityContext context = SecurityContextHolder.getContext();
             Authentication authentication = context.getAuthentication();
             Users user = userRepository.findUserByUsername(authentication.getName());
 
             if (user == null) {
-                System.out.print("User not found");
-                Response.status(Response.Status.UNAUTHORIZED).build();
-                //return ResponseHandler.response("Login status", "Login unsuccessful for user " + user.getUsername(), "login", false, null);
+                return ResponseHandler.response("Login status", "Username does not exists", "login", false, null);
             }
-            System.out.print("User found");
+
             AuthorizationToken token = jwtUtility.generate(authentication);
-            return Response.ok(token).build();
+            return ResponseHandler.response("Login status", "Login successful", "login", true, token);
         } catch (Exception e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
         }
