@@ -18,7 +18,6 @@ import lombok.Data;
 /**
  * @author Raphael Fuchs
  */
-
 @Data
 @Entity
 @Table(name = "USERS")
@@ -28,8 +27,7 @@ public class Users {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long UserID;
 
-    @Basic
-    //@Column(unique=true)
+    @Column(unique = true)
     private String Username;
 
     @Basic
@@ -91,5 +89,4 @@ public class Users {
     public void removeTaskse(Tasks taskse) {
         getTaskses().remove(taskse);
     }*/
-
 }

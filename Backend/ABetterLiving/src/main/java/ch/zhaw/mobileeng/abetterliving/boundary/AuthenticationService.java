@@ -8,6 +8,8 @@ package ch.zhaw.mobileeng.abetterliving.boundary;
 import ch.zhaw.mobileeng.abetterliving.model.Lists;
 import ch.zhaw.mobileeng.abetterliving.model.Users;
 import ch.zhaw.mobileeng.abetterliving.repository.UserRepository;
+import ch.zhaw.mobileeng.abetterliving.security.JWTUtility;
+import ch.zhaw.sml.iwi.pmis.gtd.lite.backend.dto.AuthorizationToken;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,32 +24,41 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
-@Path("/")
+@Path("/login")
 public class AuthenticationService {
 
     @Autowired
     private UserRepository userRepository;
 
-    /*@POST
-    @Path("/login")
-    @Consumes(MediaType.APPLICATION_JSON)
+    @Autowired
+    private JWTUtility jwtUtility;
+
+    @GET
+    @CrossOrigin
     @Produces(MediaType.APPLICATION_JSON)
-    public Response login(HashMap<String, String> credentials) {
-        if (!credentials.get("username").isEmpty() && !credentials.get("password").isEmpty()) {
-            Users u = userRepository.findUserByUsername(credentials.get("username"));
-            if (u.getPassword().equals(credentials.get("password"))) {
-                Object
-            }
-    //https://www.mkyong.com/java/how-to-convert-java-object-to-from-json-jackson/
-    //https://stackoverflow.com/questions/28004298/how-to-set-and-check-cookies-wih-jax-rs
-                NewCookie newCookie = new NewCookie("user",u.t);
-                login.addCookie(new Cookie("user", "json"));
-            }
-        } else {
+    public Response login() {
 
+        try {
+            SecurityContext context = SecurityContextHolder.getContext();
+            Authentication authentication = context.getAuthentication();
+            Users user = userRepository.findUserByUsername(authentication.getName());
+
+            if (user == null) {
+                // This shouldn't be reachable anyway as login() sould be protected
+                // by HTTP-Basic authorization. Hence if successful, we should have
+                // a valid user object here.
+                Response.status(Response.Status.UNAUTHORIZED).build();
+            }
+
+            AuthorizationToken token = jwtUtility.generate(authentication);
+            return Response.ok(token).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
         }
-
-        return null;
-    }*/
+    }
 }
