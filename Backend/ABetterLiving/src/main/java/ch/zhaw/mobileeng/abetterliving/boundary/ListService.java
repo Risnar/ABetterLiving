@@ -1,7 +1,7 @@
 package ch.zhaw.mobileeng.abetterliving.boundary;
 
-import ch.zhaw.mobileeng.abetterliving.model.Tasks;
-import ch.zhaw.mobileeng.abetterliving.repository.TaskRepository;
+import ch.zhaw.mobileeng.abetterliving.model.Lists;
+import ch.zhaw.mobileeng.abetterliving.repository.ListRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,19 +16,19 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 
-@Path("/task")
-public class TaskService {
+@Path("/list")
+public class ListService {
 
     @Autowired
-    private TaskRepository taskRepository;
+    private ListRepository listRepository;
 
     @GET
     @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Tasks> getAllTasks() {
-        List<Tasks> resList = new ArrayList<>();
-        for (Tasks t : taskRepository.findAll()) {
-            resList.add(t);
+    public List<Lists> getAllEntries() {
+        List<Lists> resList = new ArrayList<>();
+        for (Lists l : listRepository.findAll()) {
+            resList.add(l);
         }
         return resList;
     }
@@ -38,7 +38,7 @@ public class TaskService {
     @Produces(MediaType.APPLICATION_JSON)
     public Object getEntryByID(@PathParam("id") Long id) {
         try {
-            return taskRepository.findById(id).get();
+            return listRepository.findById(id).get();
         } catch (Exception e) {
             return ResponseHandler.response("Request failed", e.getMessage(), "get", false, null);
         }
@@ -48,10 +48,10 @@ public class TaskService {
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Object updateEntry(Tasks t, @PathParam("id") Long id) {
+    public Object updateEntry(Lists l, @PathParam("id") Long id) {
         try {
-            t.setTaskID(id);
-            Tasks saved = taskRepository.save(t);
+            l.setListID(id);
+            Lists saved = listRepository.save(l);
             return ResponseHandler.response("Update successful", "", "put", true, saved);
         } catch (Exception e) {
             return ResponseHandler.response("Update failed", e.getMessage(), "put", false, null);
@@ -60,10 +60,10 @@ public class TaskService {
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Object addEntry(Tasks t) {
+    public Object addEntry(Lists l) {
         try {
-            t.setTaskID(null);
-            Tasks saved = taskRepository.save(t);
+            l.setListID(null);
+            Lists saved = listRepository.save(l);
             return ResponseHandler.response("Insert successful", "", "post", true, saved);
         } catch (Exception e) {
             return ResponseHandler.response("Insert failed", e.getMessage(), "post", false, null);
@@ -75,7 +75,7 @@ public class TaskService {
     @Produces(MediaType.APPLICATION_JSON)
     public Object deleteEntry(@PathParam("id") Long id) {
         try {
-            taskRepository.deleteById(id);
+            listRepository.deleteById(id);
             return ResponseHandler.response("Delete successful", "", "post", true, null);
         } catch (Exception e) {
             return ResponseHandler.response("Delete failed", e.getMessage(), "post", false, null);

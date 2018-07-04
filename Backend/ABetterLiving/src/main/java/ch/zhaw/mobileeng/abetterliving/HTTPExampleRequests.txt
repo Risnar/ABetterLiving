@@ -1,0 +1,54 @@
+------------- TASK -------------
+HTTP-Request-Type URL
+
+GET http://localhost:8080/task/all
+GET http://localhost:8080/task/id/6
+INSERT http://localhost:8080/task/
+{
+	"list": null,
+	"owner": {
+		"userID": 1
+	},
+	"project": null,
+	"userses": null,
+	"priority": 1,
+	"title": "Test",
+	"status": 3,
+	"dueDate": 1530652257770,
+	"creationDate": 1530652257770,
+	"requiredTime": 2300,
+	"note": "Test muss ausgeführt werden",
+	"taskID": 6
+}
+DELETE http://localhost:8080/task/6
+UPDATE http://localhost:8080/task/6
+{
+	"list": null,                                   (Immer mit Klammer und mindestens der richtigen ID)
+	"owner": {
+		"userID": 1
+	},
+	"project": null,                                (Immer mit Klammer und mindestens der richtigen ID)
+	"userses": null,                                (Als Array mit User-Objekten und mindestens der richtigen ID)
+	"priority": 1,                                  (0,1,2,3)
+	"title": "Babyklappe",
+	"status": 1,                                    (0,1)
+	"dueDate": 1530652257770,
+	"creationDate": 1530652257770,                  
+	"requiredTime": 1000,                           (IMMER IN MILLISEKUNDEN)
+	"note": "Ein Kind zur Babyklappe bringen.",
+	"taskID": 6
+}
+
+------------- LIST -------------
+GET http://localhost:8080/list/all
+GET http://localhost:8080/list/id/{id}
+INSERT http://localhost:8080/list/
+UPDATE http://localhost:8080/list/{id}
+DELETE http://localhost:8080/list/{id}
+
+------------- USER -------------
+GET http://localhost:8080/user/all
+GET http://localhost:8080/user/id/{id}
+INSERT http://localhost:8080/user/
+UPDATE http://localhost:8080/user/{id}
+DELETE http://localhost:8080/user/{id}
