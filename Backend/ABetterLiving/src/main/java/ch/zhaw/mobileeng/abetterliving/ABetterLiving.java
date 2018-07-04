@@ -64,7 +64,7 @@ public class ABetterLiving extends ResourceConfig {
             Users u = new Users();
             u.setEmail("jannick.meier@example.hei");
             u.setUsername("ex");
-            u.setPassword("ex");
+            u.setAndHashPassword("ex");
             userRepository.save(u);
             //Example lists
             String[] standardList = {"Unsortiert", "Warten auf", "Irgendwann", "Kalender"};

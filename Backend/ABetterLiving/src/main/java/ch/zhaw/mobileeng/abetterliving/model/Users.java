@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import lombok.Data;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
  * @author Raphael Fuchs
@@ -38,6 +39,10 @@ public class Users {
 
     @ManyToMany(mappedBy = "userses")
     private List<Tasks> taskses;
+
+    public void setAndHashPassword(String plainTextPW) {
+        Password = (new BCryptPasswordEncoder()).encode(plainTextPW);
+    }
 
     /*public Long getUserID() {
         return this.UserID;
