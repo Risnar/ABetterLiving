@@ -10,6 +10,8 @@
 <ion-content class="home" padding>
   <h3>Welcome inside, {{username}}!</h3>
   Your Email is: {{email}}
+  <br />
+  <br />
 
   <ion-list>
     <ion-list-header>Heute</ion-list-header>
@@ -19,6 +21,13 @@
       <p>My eyeballs could have been sucked from their sockets!</p>
       <ion-note item-end>1:12 pm</ion-note>
     </button>
+  </ion-list>
+
+  <h2>Unassigned tasks</h2>
+  <ion-list>
+    <ion-item *ngFor="let task of tasks">
+      {{task.name}}
+    </ion-item>
   </ion-list>
 
 

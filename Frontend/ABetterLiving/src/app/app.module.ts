@@ -9,6 +9,8 @@ import { LoginPage } from '../pages/login/login';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AuthService } from '../providers/auth-service/auth-service';
+import { TasksProvider } from '../providers/tasks/tasks';
+import { TaskProvider } from '../providers/task/task';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { AuthService } from '../providers/auth-service/auth-service';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AuthService
+    AuthService,
+    TasksProvider,
+    TaskProvider
   ]
 })
 export class AppModule {}
