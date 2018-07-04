@@ -5,23 +5,14 @@
  */
 package ch.zhaw.mobileeng.abetterliving.boundary;
 
-import ch.zhaw.mobileeng.abetterliving.model.Lists;
 import ch.zhaw.mobileeng.abetterliving.model.Users;
 import ch.zhaw.mobileeng.abetterliving.repository.UserRepository;
 import ch.zhaw.mobileeng.abetterliving.security.JWTUtility;
-import ch.zhaw.sml.iwi.pmis.gtd.lite.backend.dto.AuthorizationToken;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.Consumes;
+import ch.zhaw.mobileeng.abetterliving.dto.AuthorizationToken;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -49,12 +40,14 @@ public class AuthenticationService {
             Users user = userRepository.findUserByUsername(authentication.getName());
 
             if (user == null) {
+                System.out.print("User not found");
+
                 // This shouldn't be reachable anyway as login() sould be protected
                 // by HTTP-Basic authorization. Hence if successful, we should have
                 // a valid user object here.
                 Response.status(Response.Status.UNAUTHORIZED).build();
             }
-
+            System.out.print("User found");
             AuthorizationToken token = jwtUtility.generate(authentication);
             return Response.ok(token).build();
         } catch (Exception e) {

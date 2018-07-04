@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright 2018 Peter Heinrich <peter.heinrich@zhaw.ch>.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ch.zhaw.sml.iwi.pmis.gtd.lite.backend.dto;
+package ch.zhaw.mobileeng.abetterliving.dto;
 
 import java.util.Date;
 import lombok.Data;
@@ -24,6 +24,7 @@ import lombok.Data;
  */
 @Data
 public class AuthorizationToken {
+
     private String token;
     private Date expiresAt;
 }

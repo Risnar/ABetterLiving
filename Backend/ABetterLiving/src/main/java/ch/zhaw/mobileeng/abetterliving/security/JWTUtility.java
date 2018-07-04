@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright 2018 Peter Heinrich <peter.heinrich@zhaw.ch>.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,7 +15,7 @@
  */
 package ch.zhaw.mobileeng.abetterliving.security;
 
-import ch.zhaw.sml.iwi.pmis.gtd.lite.backend.dto.AuthorizationToken;
+import ch.zhaw.mobileeng.abetterliving.dto.AuthorizationToken;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwtBuilder;
@@ -43,7 +43,7 @@ import org.springframework.stereotype.Component;
 public class JWTUtility {
 
     private static final Logger LOGGER = Logger.getLogger(JWTUtility.class.getName());
-    
+
     @Value("${config.jwt.tokenExpiration}")
     private int tokenExpiration;
     @Value("${config.jwt.tokenSecret}")
@@ -66,7 +66,7 @@ public class JWTUtility {
                 .signWith(SignatureAlgorithm.HS512, tokenSecret)
                 .compact();
         LOGGER.log(Level.INFO, "Created JWT-Token for {0}. Valid until {1}", new Object[]{user.getUsername(), expiresAt});
-        
+
         AuthorizationToken authToken = new AuthorizationToken();
         authToken.setExpiresAt(expiresAt);
         authToken.setToken(token);
@@ -74,12 +74,13 @@ public class JWTUtility {
     }
 
     public void validate(String token) {
-           Jwts.parser().setSigningKey(tokenSecret).parseClaimsJws(token);
+        Jwts.parser().setSigningKey(tokenSecret).parseClaimsJws(token);
     }
 
     public String getLoginEmail(String token) {
         return Jwts.parser().setSigningKey(tokenSecret).parseClaimsJws(token).getBody().getSubject();
     }
+
     public List<GrantedAuthority> getUserGrantedAuthorititesByToken(String bearerToken) {
         Jws<Claims> claims = Jwts.parser().setSigningKey(tokenSecret).parseClaimsJws(bearerToken);
         ArrayList<HashMap> roles = (ArrayList) claims.getBody().get("authorities");
