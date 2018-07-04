@@ -12,17 +12,18 @@ import { TaskProvider } from '../providers/task/task';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginProvider } from '../providers/login/login';
 import { JWTInterceptor } from '../security/jwtInterceptor';
+import { LoginPageModule } from '../pages/login/login.module';
 
 @NgModule({
   declarations: [
     MyApp,
     ListPage,
-    LoginPage,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
+    LoginPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

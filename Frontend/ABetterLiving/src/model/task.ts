@@ -3,13 +3,13 @@ import { Lists } from "./Lists";
 import { Users } from "./Users";
 
 export interface Task {
-    TaskID: number;
-    Title: string;
-    Priority: number;
-    RequiredTime: DateTime;
-    DueDate: Date;
-    CreationDate: number;
-    Status: number;
+    taskID: number;
+    title: string;
+    priority: number;
+    requiredTime: DateTime;
+    dueDate: Date;
+    creationDate: number;
+    status: number;
     list: Lists;
     projects: Lists;
     owner: Users;

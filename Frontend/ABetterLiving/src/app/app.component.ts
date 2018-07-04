@@ -7,7 +7,6 @@ import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
 
-
 @Component({
   templateUrl: 'app.html'
 })
@@ -41,6 +40,12 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
+  }
+
+  public logout(){
+      localStorage.removeItem('jwt_token');
+      localStorage.removeItem('jwt_token_expires');
+      this.nav.setRoot('LoginPage');
   }
 
 }
