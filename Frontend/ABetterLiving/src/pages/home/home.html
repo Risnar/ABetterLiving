@@ -7,7 +7,10 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content class="home" padding>
+  <h3>Welcome inside, {{username}}!</h3>
+  Your Email is: {{email}}
+
   <ion-list>
     <ion-list-header>Heute</ion-list-header>
     <button ion-item (click)="itemTapped($event, item)">
@@ -17,10 +20,10 @@
       <ion-note item-end>1:12 pm</ion-note>
     </button>
   </ion-list>
+
+
 </ion-content>
 
-<!--<ion-footer-bar>
-  <button>
 
-  </button>
+<!--<ion-footer-bar>
 </ion-footer-bar><-->
