@@ -1,22 +1,46 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Task } from '../../model/task';
+import { TaskProvider } from '../../providers/task/task';
 
-/**
- * Generated class for the TasklistComponent component.
- *
- * See https://angular.io/api/core/Component for more info on Angular
- * Components.
- */
 @Component({
   selector: 'tasklist',
   templateUrl: 'tasklist.html'
 })
-export class TasklistComponent {
+export class TasklistComponent implements OnInit{
 
-  text: string;
+  private tasks: Array<Task> = [];
 
-  constructor() {
-    console.log('Hello TasklistComponent Component');
-    this.text = 'Hello World';
+  constructor(private taskProvider: TaskProvider) {
   }
+
+  ngOnInit() {
+    this.getAllTasks();
+  }
+
+  getAllTasks(): void {
+    this.taskProvider.getAllTasks().subscribe( tasks => {
+      this.tasks = tasks;      
+    });
+  }
+
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad Homepage');
+  }
+
+  setTaskToDone(id){
+    alert("Task mit ID " +id + " ist erledigt!");
+  }
+
+  openTaskDetail(id){
+    alert("Task mit ID " +id + " wird geöffnet !");
+  }
+
+  deleteTask(id){
+    alert("Task mit ID " +id + " wird gelöscht");
+    this.taskProvider.deleteTask(id);
+  }
+
+
+
 
 }

@@ -12,7 +12,7 @@ export class LoginProvider {
   private authserviceUrl = 'http://localhost:8080';  // URL to web api
 
   constructor(public http: HttpClient) {
-    console.log('Hello LoginProvider Provider');
+    console.log('Hello LoginProvider');
   }
 
   requestAccessToken(username: String, password: String): Observable<AuthToken> {

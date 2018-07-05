@@ -5,6 +5,7 @@ import { Users } from "./Users";
 export interface Task {
     taskID: number;
     title: string;
+    note: string;
     priority: number;
     requiredTime: DateTime;
     dueDate: Date;
@@ -14,6 +15,8 @@ export interface Task {
     projects: Lists;
     owner: Users;
 }
+
+
 
 /*export class TaskImpl implements Task {
     id: number;
