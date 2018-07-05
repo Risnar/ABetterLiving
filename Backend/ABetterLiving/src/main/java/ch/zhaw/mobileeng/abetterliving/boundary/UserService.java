@@ -63,6 +63,7 @@ public class UserService {
     public Object addEntry(Users u) {
         try {
             u.setUserID(null);
+            u.setAndHashPassword(u.getPassword());
             Users saved = listRepository.save(u);
             return ResponseHandler.response("Insert successful", "", "post", true, saved);
         } catch (Exception e) {

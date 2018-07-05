@@ -44,6 +44,21 @@ public class TaskService {
         }
     }
 
+    @GET
+    @Path("/listid/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Object getEntryByListsID(@PathParam("id") Long id) {
+        try {
+            List<Tasks> resList = new ArrayList<>();
+            for (Tasks t : taskRepository.getAllTasksByListID(id)) {
+                resList.add(t);
+            }
+            return resList;
+        } catch (Exception e) {
+            return ResponseHandler.response("Request failed", e.getMessage(), "get", false, null);
+        }
+    }
+
     @PUT
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
