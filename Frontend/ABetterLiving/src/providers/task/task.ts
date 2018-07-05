@@ -17,8 +17,8 @@ export class TaskProvider {
 
   }
 
-  // GET /task/unassigned
-  getUnassignedTasks (): Observable<Task[]> {
+  // GET /task/all
+  getAllTasks (): Observable<Task[]> {
     return this.http.get<Task[]>(this.tasksUrl+"/all", httpOptions);
   }
 

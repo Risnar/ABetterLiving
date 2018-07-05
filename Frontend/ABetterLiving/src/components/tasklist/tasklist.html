@@ -1,4 +1,20 @@
-<!-- Generated template for the TasklistComponent component -->
-<div>
-  {{text}}
-</div>
+<ion-list>
+    <ion-item-sliding *ngFor="let task of tasks">
+      <ion-item>
+          <ion-icon name="checkbox-outline" item-start></ion-icon>
+        <h2>{{task.title}}</h2>
+        <p>{{task.note}}</p>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button color="secondary" (click)="setTaskToDone(task.taskID)">
+          <ion-icon name="checkmark-circle"></ion-icon>
+        </button>
+        <button ion-button color="primary" (click)="openTaskDetail(task.taskID)">
+          <ion-icon name="eye"></ion-icon>
+        </button>
+        <button ion-button color="danger" (click)="deleteTask(task.taskID)" >
+          <ion-icon name="trash"></ion-icon>
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
