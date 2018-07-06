@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, Platform } from 'ionic-angular';
 import { LoginProvider } from '../../providers/login/login';
 import { GlobalVarsProvider } from '../../providers/global-vars/global-vars';
-
+import { NativeAudio } from '@ionic-native/native-audio';
 /**
  * Generated class for the LoginPage page.
  *
@@ -20,11 +20,32 @@ export class LoginPage {
   private username: string = '';
   private password: string = '';
 
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public navParams: NavParams, public loginProvider: LoginProvider, public globalVars: GlobalVarsProvider) {
-  }
+  constructor(
+    public platform: Platform,
+    public navCtrl: NavController,
+    public alertCtrl: AlertController,
+    public navParams: NavParams,
+    public loginProvider: LoginProvider,
+    public globalVars: GlobalVarsProvider,
+    private nativeAudio: NativeAudio
+  ) { }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
+    //Ladet das Audiofile für die welcome message
+    this.nativeAudio.preloadSimple('welcomeLine', 'www/sounds/Welcome.mp3');
+  }
+
+  onSuccess(e) {
+    console.log("music loaded");
+  }
+
+  onError(e) {
+    console.log("nooo");
+  }
+
+  unClicked() {
+    //PLay welcome sound
+    this.nativeAudio.play('welcomeLine');
   }
 
   public login() {

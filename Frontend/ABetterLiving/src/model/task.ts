@@ -7,9 +7,9 @@ export interface Task {
     title: string;
     note: string;
     priority: number;
-    requiredTime: DateTime;
-    dueDate: Date;
-    creationDate: number;
+    requiredTime: string;
+    dueDate: string;
+    creationDate: string;
     status: number;
     list: List;
     project: List;

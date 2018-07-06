@@ -5,6 +5,7 @@ import { Task } from '../../model/task';
 import { SrvResponse } from '../../model/srvResponse'
 import { TaskProvider } from '../../providers/task/task';
 import { isDefined } from 'ionic-angular/umd/util/util';
+import { NativeAudio } from '@ionic-native/native-audio';
 
 /**
  * Generated class for the TaskEditorPage page.
@@ -26,7 +27,7 @@ export class TaskEditorPage {
   title: String = "Neuer Task erfassen";
   hiddenDeleteButton = 0;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder, public alertCtrl: AlertController, private taskProvider: TaskProvider) {
+  constructor(public navCtrl: NavController, private nativeAudio: NativeAudio, public navParams: NavParams, public formBuilder: FormBuilder, public alertCtrl: AlertController, private taskProvider: TaskProvider) {
     console.log(this);
     if (navParams.data.taskList !== undefined) {
       this.taskList = navParams.data.taskList;
@@ -64,20 +65,28 @@ export class TaskEditorPage {
       this.taskProvider.updateTask(this.task).subscribe(response => {
         if (response.successful) {
           this.showAlert("Task angepasst", 'Der Task wurde erfolgreich angepasst.');
+          //-->Play sound
+          this.nativeAudio.play('thatsit');
           //Auf die rootpage zurückkehren
           this.navCtrl.popToRoot();
         } else {
           this.showAlert("Anpassung fehlgeschlagen", 'Der Task wurde nicht erfolgreich angepasst.');
+          //-->Play sound
+          this.nativeAudio.play('nexttime');
         }
       },
         error => {
           console.log(error);
           this.showAlert("Fehler", 'Beim speichern ist ein Fehler aufgetreten. ' + error);
+          //-->Play sound
+          this.nativeAudio.play('nexttime');
         });
     } else {
       this.taskProvider.addTask(this.task).subscribe(response => {
         if (response.successful) {
           this.showAlert("Task hinzugefügt", 'Der Task wurde erfolgreich gespeichert.');
+          //-->Play sound
+          this.nativeAudio.play('thatsit');
           //Fügt den neuen Task dem arraylist aus dem parent hinzu
           if (this.taskList !== undefined) {
             this.taskList.push(response.data as Task);
@@ -86,11 +95,15 @@ export class TaskEditorPage {
           this.navCtrl.popToRoot();
         } else {
           this.showAlert("Speichern fehlgeschlagen", 'Der Task wurde nicht erfolgreich gespeichert.');
+          //-->Play sound
+          this.nativeAudio.play('nexttime');
         }
       },
         error => {
           console.log(error);
           this.showAlert("Fehler", 'Beim speichern ist ein Fehler aufgetreten. ' + error);
+          //-->Play sound
+          this.nativeAudio.play('nexttime');
         });
     }
   }
@@ -99,6 +112,8 @@ export class TaskEditorPage {
     this.taskProvider.deleteTask(this.task).subscribe(response => {
       if (response.successful) {
         this.showAlert("Löschen erfolgreich", 'Der Task wurde erfolgreich gelöscht.');
+        //-->Play sound
+        this.nativeAudio.play('thatsit');
         //Entfernt den task aus dem tasklist array welches vom parent übergeben wurde.
         if (this.taskList !== undefined) {
           const idx = this.taskList.indexOf(this.task);
@@ -108,11 +123,15 @@ export class TaskEditorPage {
         this.navCtrl.popToRoot();
       } else {
         this.showAlert("Löschen fehlgeschlagen", 'Der Task wurde nicht erfolgreich gelöscht.');
+        //-->Play sound
+        this.nativeAudio.play('nexttime');
       }
     },
       error => {
         console.log(error);
         this.showAlert("Fehler", 'Beim löschen ist ein Fehler aufgetreten. ' + error);
+        //-->Play sound
+        this.nativeAudio.play('nexttime');
       });
   }
 

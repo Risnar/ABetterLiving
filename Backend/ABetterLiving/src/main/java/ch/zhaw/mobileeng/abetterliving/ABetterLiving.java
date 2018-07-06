@@ -66,6 +66,26 @@ public class ABetterLiving extends ResourceConfig {
             u.setUsername("ex");
             u.setAndHashPassword("ex");
             userRepository.save(u);
+            u = new Users();
+            u.setEmail("raphael@fuchs.com");
+            u.setUsername("Rapahel");
+            u.setAndHashPassword("Fuchs");
+            userRepository.save(u);
+            u = new Users();
+            u.setEmail("jannick@meier.com");
+            u.setUsername("Rapahel");
+            u.setAndHashPassword("Fuchs");
+            userRepository.save(u);
+            u = new Users();
+            u.setEmail("jannick.meier@example.hei");
+            u.setUsername("ex");
+            u.setAndHashPassword("ex");
+            userRepository.save(u);
+            u = new Users();
+            u.setEmail("jannick.meier@example.hei");
+            u.setUsername("ex");
+            u.setAndHashPassword("ex");
+            userRepository.save(u);
             //Example lists
             String[] standardList = {"Unsortiert", "Warten auf", "Irgendwann", "Kalender"};
             for (String list : standardList) {
@@ -83,7 +103,7 @@ public class ABetterLiving extends ResourceConfig {
             t.setOwner(u);
             t.setPriority(1);
             t.setRequiredTime(new Date());
-            t.setStatus(3);
+            t.setStatus(0);
             taskRepository.save(t);
             //Add project
             Lists p = new Lists();
@@ -98,7 +118,7 @@ public class ABetterLiving extends ResourceConfig {
             t.setOwner(u);
             t.setProject(p);
             t.setPriority(3);
-            t.setStatus(3);
+            t.setStatus(0);
             t.setRequiredTime(new Date());
             t.setDueDate(new Date());
             t.setCreationDate(new Date());

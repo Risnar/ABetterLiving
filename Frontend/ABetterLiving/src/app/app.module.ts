@@ -14,6 +14,8 @@ import { GlobalVarsProvider } from '../providers/global-vars/global-vars';
 import { HomePageModule } from '../pages/home/home.module';
 import { AllTasksPageModule } from '../pages/all-tasks/all-tasks.module';
 import { TaskEditorPageModule } from '../pages/task-editor/task-editor.module';
+import { NativeAudio } from '@ionic-native/native-audio';
+import { SmartAudioProvider } from '../providers/smart-audio/smart-audio';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,8 @@ import { TaskEditorPageModule } from '../pages/task-editor/task-editor.module';
       useClass: JWTInterceptor,
       multi: true
     },
-    GlobalVarsProvider
+    GlobalVarsProvider,
+    NativeAudio
   ]
 })
 export class AppModule { }
