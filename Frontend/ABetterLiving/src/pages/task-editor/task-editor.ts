@@ -80,7 +80,7 @@ export class TaskEditorPage {
           this.showAlert("Task hinzugefügt", 'Der Task wurde erfolgreich gespeichert.');
           //Fügt den neuen Task dem arraylist aus dem parent hinzu
           if (this.taskList !== undefined) {
-            this.taskList.push(this.task);
+            this.taskList.push(response.data as Task);
           }
           //Auf die rootpage zurückkehren
           this.navCtrl.popToRoot();
