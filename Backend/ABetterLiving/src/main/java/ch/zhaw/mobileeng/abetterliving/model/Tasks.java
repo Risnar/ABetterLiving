@@ -3,6 +3,7 @@
  */
 package ch.zhaw.mobileeng.abetterliving.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -28,34 +29,36 @@ import lombok.Data;
 @Table(name = "TASKS")
 public class Tasks {
 
-    @Column(name = "TASKID")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long TaskID;
+    private Long taskID;
 
     @Basic
-    private String Title;
+    private String title;
 
     @Basic
-    private String Note;
+    private String note;
 
     @Basic
-    private Integer Priority;
+    private Integer priority;
 
     @Basic
     @Temporal(TemporalType.TIME)
-    private Date RequiredTime;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
+    private Date requiredTime;
 
     @Basic
     @Temporal(TemporalType.TIMESTAMP)
-    private Date DueDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
+    private Date dueDate;
 
     @Basic
     @Temporal(TemporalType.TIMESTAMP)
-    private Date CreationDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
+    private Date creationDate;
 
     @Basic
-    private Integer Status;
+    private Integer status;
 
     @ManyToOne
     private Lists list;

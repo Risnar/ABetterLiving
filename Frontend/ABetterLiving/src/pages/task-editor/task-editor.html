@@ -50,13 +50,13 @@
                 </ion-item>
                 <ion-item>
                     <ion-label>Erfasst am</ion-label>
-                    {{task.creationDate}}
+                    <ion-datetime disabled displayFormat="DD MMMM YYYY" name="creationDate" [(ngModel)]="task.creationDate"></ion-datetime>
                 </ion-item>
             </ion-row>
             <ion-row>
                 <button ion-button class="submit-btn" type="submit">Speichern</button>
-                <button ion-button color="danger">Löschen</button>
             </ion-row>
         </form>
+        <button ion-button color="danger" [hidden]=hiddenDeleteButton (click)="deleteTask()">Löschen</button>
     </ion-list>
 </ion-content>

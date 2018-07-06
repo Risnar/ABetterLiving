@@ -1,6 +1,6 @@
 import { Task } from "./task";
 
-export interface Users {
+export interface User {
     userID: number;
     username: string;
     email: string;

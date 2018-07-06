@@ -23,13 +23,13 @@ public class Lists {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long ListID;
+    private Long listID;
 
     @Basic
-    private String Type;
+    private String type;
 
     @Basic
-    private String Name;
+    private String name;
 
     @ManyToOne
     private Users user;

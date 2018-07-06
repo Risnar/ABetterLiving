@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, IonicPage, NavParams } from 'ionic-angular';
-import { Users } from '../../model/Users';
+import { User } from '../../model/user';
 import { GlobalVarsProvider } from '../../providers/global-vars/global-vars';
 
 @IonicPage()
@@ -10,7 +10,7 @@ import { GlobalVarsProvider } from '../../providers/global-vars/global-vars';
 })
 export class HomePage {
 
-  private user:Users;
+  private user: User;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public globalVars: GlobalVarsProvider) {
     this.user = globalVars.getActiveUser();

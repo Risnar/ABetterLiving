@@ -1,6 +1,6 @@
 import { DateTime } from "ionic-angular/umd";
-import { Lists } from "./Lists";
-import { Users } from "./Users";
+import { List } from "./list";
+import { User } from "./user";
 
 export interface Task {
     taskID: number;
@@ -11,21 +11,7 @@ export interface Task {
     dueDate: Date;
     creationDate: number;
     status: number;
-    list: Lists;
-    projects: Lists;
-    owner: Users;
+    list: List;
+    project: List;
+    owner: User;
 }
-
-
-
-/*export class TaskImpl implements Task {
-    id: number;
-    name: string;
-    done: boolean;
-    creationDate: Date;
-    dueDate: Date;
-    durationInMinutes: number;
-    project: Project;
-    context: Context;
-}
-*/

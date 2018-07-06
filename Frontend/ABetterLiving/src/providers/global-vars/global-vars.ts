@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Users } from '../../model/Users';
+import { User } from '../../model/user';
 
 /*
   Generated class for the GlobalVarsProvider provider.
@@ -11,7 +11,7 @@ import { Users } from '../../model/Users';
 @Injectable()
 export class GlobalVarsProvider {
 
-  private activeUser:Users;
+  private activeUser: User;
 
   constructor() {
   }
@@ -21,16 +21,16 @@ export class GlobalVarsProvider {
   }
 
   getActiveUser() {
-    if(this.activeUser != null){
+    if (this.activeUser != null) {
       return this.activeUser;
-    }else{
+    } else {
       return {
         userID: 0,
         username: "-",
         email: "-",
         password: "-",
         taskes: []
-      } as Users;
+      } as User;
     }
   }
 

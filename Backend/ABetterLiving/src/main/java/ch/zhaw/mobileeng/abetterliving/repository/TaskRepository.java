@@ -7,6 +7,6 @@ import org.springframework.data.repository.CrudRepository;
 public interface TaskRepository extends CrudRepository<Tasks, Long> {
 
     
-    @Query("SELECT t FROM Tasks t where t.list.ListID = :id")
+    @Query("SELECT t FROM Tasks t where t.list.listID = :id")
     public Iterable<Tasks> getAllTasksByListID(long id);
 }

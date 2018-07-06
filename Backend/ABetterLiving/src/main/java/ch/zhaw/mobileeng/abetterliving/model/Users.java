@@ -26,22 +26,22 @@ public class Users {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long UserID;
+    private Long userID;
 
     @Column(unique = true)
-    private String Username;
+    private String username;
 
     @Basic
-    private String Email;
+    private String email;
 
     @Basic
-    private String Password;
+    private String password;
 
     @ManyToMany(mappedBy = "userses")
     private List<Tasks> taskses;
 
     public void setAndHashPassword(String plainTextPW) {
-        Password = (new BCryptPasswordEncoder()).encode(plainTextPW);
+        password = (new BCryptPasswordEncoder()).encode(plainTextPW);
     }
 
     /*public Long getUserID() {
