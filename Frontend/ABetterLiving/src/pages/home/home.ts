@@ -12,7 +12,11 @@ export class HomePage {
 
   private user: User;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public globalVars: GlobalVarsProvider) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public globalVars: GlobalVarsProvider
+  ) {
     this.user = globalVars.getActiveUser();
   }
 

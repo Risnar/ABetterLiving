@@ -14,6 +14,7 @@ import { GlobalVarsProvider } from '../providers/global-vars/global-vars';
 import { HomePageModule } from '../pages/home/home.module';
 import { AllTasksPageModule } from '../pages/all-tasks/all-tasks.module';
 import { TaskEditorPageModule } from '../pages/task-editor/task-editor.module';
+import { DatePipe } from '../../node_modules/@angular/common';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { TaskEditorPageModule } from '../pages/task-editor/task-editor.module';
       useClass: JWTInterceptor,
       multi: true
     },
-    GlobalVarsProvider
+    GlobalVarsProvider,
+    DatePipe
   ]
 })
 export class AppModule { }

@@ -9,9 +9,17 @@ import { NavController, AlertController } from 'ionic-angular';
 })
 export class TasklistComponent implements OnInit {
 
-  private tasks: Array<Task>;
+  private tasks: Array<Task> = [];
+  // listType: string = "Erledigt";
+  public listType: string;
+  private currentDate: Date;
 
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController, private taskProvider: TaskProvider) {
+  constructor(
+    public navCtrl: NavController,
+    public alertCtrl: AlertController,
+    private taskProvider: TaskProvider,
+    // public listType: string
+  ) {
   }
 
   ngOnInit() {
@@ -25,9 +33,77 @@ export class TasklistComponent implements OnInit {
 
   getAllTasks(): void {
     this.taskProvider.getAllTasks().subscribe(tasks => {
-      this.tasks = tasks;
+      // this.tasks = tasks;
+      this.filterHandler(tasks);
     });
   }
+
+  public filterHandler(tasks) {
+
+    switch (this.listType) {
+      case 'Alle':
+        this.tasks = tasks;
+        break;
+      case 'Erledigt':
+        this.filterTaskByStatus(tasks);
+        break;
+      // case 'Irgendwann':
+      //   this.filterTaskByDueDate(tasks);
+      //   break;
+      // case 'Heute':
+      //   this.filterTaskByDueDate(tasks);
+      //   break;
+      // case 'Wichtig':
+      //   this.filterTaskByPriority(tasks);
+      //   break;
+      // case 'Unsortiert':
+      //   // TODO
+      //   break;
+      // case 'Warten auf':
+      //   // abhängig von anderem User
+      //   break;
+    }
+  }
+
+  public filterTaskByStatus(tasks) {
+    tasks.forEach(task => {
+      if (task.status != 1) {
+        task.iconType = 'close-circle';
+        this.tasks.push(task);
+      } else {
+        task.iconType = 'checkbox-outline';
+        this.tasks.push(task);
+      }
+    });
+  }
+
+  public filterTaskByDueDate() {
+    this.tasks.forEach(task => {
+
+      this.currentDate = new Date();
+
+      if (task.dueDate != null) {
+        task.iconType = 'copy';
+        this.tasks.push(task);
+      }
+      else if (task.dueDate === this.currentDate) {
+        task.iconType = 'clipboard';
+        this.tasks.push(task);
+      }
+    });
+  }
+  public filterTaskByPriority(tasks) {
+    tasks.forEach(task => {
+      if (task.priority = 0) {
+        task.iconType = 'close-circle'
+        this.tasks.push(task);
+      } else if (task.priority = 1) {
+        task.iconType = 'checkbox-outline'
+        this.tasks.push(task);
+      }
+    });
+  }
+
 
   public openTaskEditor() {
     this.navCtrl.push('TaskEditorPage', {
@@ -37,8 +113,21 @@ export class TasklistComponent implements OnInit {
     });
   }
 
-  setTaskToDone(id) {
-    alert("Task mit ID " + id + " ist erledigt!");
+  setTaskToDone(task) {
+    task.status = 0 ? 1 : 0;
+
+    this.taskProvider.updateTask(task).subscribe(response => {
+      if (response.successful) {
+        this.showAlert("Task angepasst", 'Task wurde als erledigt markiert!');
+        //Auf die rootpage zurückkehren
+      } else {
+        this.showAlert("Anpassung fehlgeschlagen", 'Der Task wurde nicht erfolgreich angepasst.');
+      }
+    },
+      error => {
+        console.log(error);
+        this.showAlert("Fehler", 'Beim speichern ist ein Fehler aufgetreten. ' + error);
+      });
   }
 
   openTaskDetail(task) {

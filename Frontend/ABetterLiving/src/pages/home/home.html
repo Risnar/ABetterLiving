@@ -1,8 +1,8 @@
 <ion-header>
     <ion-navbar>
         <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
+            <ion-icon name="menu"></ion-icon>
+        </button>
         <ion-title>Home</ion-title>
     </ion-navbar>
 </ion-header>
@@ -10,5 +10,6 @@
 <ion-content padding>
     <h1>Hallo {{user.username}}!</h1>
     <h2>Heute zu bearbeiten:</h2>
-    <tasklist></tasklist>
+    
+    <tasklist [listType]="Erledigt" ></tasklist>
 </ion-content>
