@@ -6,12 +6,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { AllTasksPage } from '../pages/all-tasks/all-tasks';
-import { TaskTodayComponent } from '../components/task-today/task-today';
-import { TaskSomewhenComponent } from '../components/task-somewhen/task-somewhen';
-import { TaskOnholdComponent } from '../components/task-onhold/task-onhold';
-import { TaskDoneComponent } from '../components/task-done/task-done';
-import { TaskScheduledComponent } from '../components/task-scheduled/task-scheduled';
-import { ComponentsModule } from '../components/components.module';
+import { TaskTodayPage } from '../pages/task-today/task-today';
+import { TaskSomewhenPage } from '../pages/task-somewhen/task-somewhen';
+import { TaskOnholdPage } from '../pages/task-onhold/task-onhold';
+import { TaskDonePage } from '../pages/task-done/task-done';
+import { TaskScheduledPage } from '../pages/task-scheduled/task-scheduled';
 
 
 @Component({
@@ -28,7 +27,6 @@ export class MyApp {
     public platform: Platform,
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
-    public component: ComponentsModule
   ) {
     this.initializeApp();
 
@@ -36,11 +34,11 @@ export class MyApp {
     this.pages = [
       { title: 'Home', icon: 'home', component: HomePage },
       { title: 'Alle', icon: 'apps', component: AllTasksPage },
-      { title: 'Heute', icon: 'clock', component: TaskTodayComponent },
-      { title: 'Irgendwann', icon: 'help-circle', component: TaskSomewhenComponent },
-      { title: 'Warten auf', icon: 'pause', component: TaskOnholdComponent },
-      { title: 'Erledigt', icon: 'checkbox-outline', component: TaskDoneComponent },
-      { title: 'Kalender', icon: 'calendar', component: TaskScheduledComponent }
+      { title: 'Heute', icon: 'clock', component: TaskTodayPage },
+      { title: 'Irgendwann', icon: 'help-circle', component: TaskSomewhenPage },
+      { title: 'Warten auf', icon: 'pause', component: TaskOnholdPage },
+      { title: 'Erledigt', icon: 'checkbox-outline', component: TaskDonePage },
+      { title: 'Kalender', icon: 'calendar', component: TaskScheduledPage }
 
     ];
 

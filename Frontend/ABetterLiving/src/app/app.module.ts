@@ -14,6 +14,11 @@ import { GlobalVarsProvider } from '../providers/global-vars/global-vars';
 import { HomePageModule } from '../pages/home/home.module';
 import { AllTasksPageModule } from '../pages/all-tasks/all-tasks.module';
 import { TaskEditorPageModule } from '../pages/task-editor/task-editor.module';
+import { TaskDonePageModule } from '../pages/task-done/task-done.module';
+import { TaskTodayPageModule } from '../pages/task-today/task-today.module';
+import { TaskOnholdPageModule } from '../pages/task-onhold/task-onhold.module';
+import { TaskScheduledPageModule } from '../pages/task-scheduled/task-scheduled.module';
+import { TaskSomewhenPageModule } from '../pages/task-somewhen/task-somewhen.module';
 
 
 @NgModule({
@@ -28,10 +33,16 @@ import { TaskEditorPageModule } from '../pages/task-editor/task-editor.module';
     HomePageModule,
     AllTasksPageModule,
     TaskEditorPageModule,
+    // TaskDonePageModule,
+    TaskTodayPageModule,
+    // TaskOnholdPageModule,
+    // TaskScheduledPageModule,
+    // TaskSomewhenPageModule,
+
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp
+    MyApp,
   ],
   providers: [
     StatusBar,
