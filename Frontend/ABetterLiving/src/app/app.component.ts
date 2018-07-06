@@ -14,20 +14,20 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = LoginPage;
-  
-  pages: Array<{title: string, icon: string, component: any}>;
+
+  pages: Array<{ title: string, icon: string, component: any }>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', icon: 'home' , component: HomePage },
-      { title: 'Alle', icon: 'apps' ,component: AllTasksPage },
-      { title: 'Heute', icon: 'clock' , component: HomePage },
-      { title: 'Markiert', icon: 'star' , component: HomePage },
-      { title: 'Projekte', icon: 'folder-open' , component: HomePage },
-      { title: 'Erledigt', icon: 'checkmark-circle' , component: HomePage }
+      { title: 'Home', icon: 'home', component: HomePage },
+      { title: 'Alle', icon: 'apps', component: AllTasksPage },
+      { title: 'Heute', icon: 'clock', component: HomePage },
+      { title: 'Markiert', icon: 'star', component: HomePage },
+      { title: 'Projekte', icon: 'folder-open', component: HomePage },
+      { title: 'Erledigt', icon: 'checkmark-circle', component: HomePage }
     ];
 
   }
@@ -47,10 +47,18 @@ export class MyApp {
     this.nav.setRoot(page.component);
   }
 
-  public logout(){
-      localStorage.removeItem('jwt_token');
-      localStorage.removeItem('jwt_token_expires');
-      this.nav.setRoot('LoginPage');
+  public logout() {
+    localStorage.removeItem('jwt_token');
+    localStorage.removeItem('jwt_token_expires');
+    this.nav.setRoot('LoginPage');
+
+  }
+
+  public openTaskEditor() {
+    this.nav.push('TaskEditorPage', {
+      task: null,
+      editorMode: 'new'
+    });
   }
 
 }

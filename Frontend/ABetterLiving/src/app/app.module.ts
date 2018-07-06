@@ -5,32 +5,32 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { MyApp } from './app.component';
-import { LoginPage } from '../pages/login/login';
 import { TaskProvider } from '../providers/task/task';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginProvider } from '../providers/login/login';
 import { JWTInterceptor } from '../security/jwtInterceptor';
 import { LoginPageModule } from '../pages/login/login.module';
-import { AllTasksPage } from '../pages/all-tasks/all-tasks';
-import { TasklistComponent } from '../components/tasklist/tasklist';
+import { GlobalVarsProvider } from '../providers/global-vars/global-vars';
+import { HomePageModule } from '../pages/home/home.module';
+import { AllTasksPageModule } from '../pages/all-tasks/all-tasks.module';
+import { TaskEditorPageModule } from '../pages/task-editor/task-editor.module';
 
 @NgModule({
   declarations: [
-    MyApp,
-    AllTasksPage,
-    TasklistComponent
+    MyApp
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
-    LoginPageModule
+    LoginPageModule,
+    HomePageModule,
+    AllTasksPageModule,
+    TaskEditorPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
-    LoginPage,
-    AllTasksPage
+    MyApp
   ],
   providers: [
     StatusBar,
@@ -42,7 +42,8 @@ import { TasklistComponent } from '../components/tasklist/tasklist';
       provide: HTTP_INTERCEPTORS,
       useClass: JWTInterceptor,
       multi: true
-    }
+    },
+    GlobalVarsProvider
   ]
 })
 export class AppModule { }

@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Task } from '../../model/task';
 import { TaskProvider } from '../../providers/task/task';
+import { NavController } from 'ionic-angular';
 
 @Component({
   selector: 'tasklist',
   templateUrl: 'tasklist.html'
 })
-export class TasklistComponent implements OnInit{
+export class TasklistComponent implements OnInit {
 
-  private tasks: Array<Task> = [];
+  private tasks: Array<Task>;
 
-  constructor(private taskProvider: TaskProvider) {
+  constructor(public navCtrl: NavController, private taskProvider: TaskProvider) {
   }
 
   ngOnInit() {
@@ -18,8 +19,8 @@ export class TasklistComponent implements OnInit{
   }
 
   getAllTasks(): void {
-    this.taskProvider.getAllTasks().subscribe( tasks => {
-      this.tasks = tasks;      
+    this.taskProvider.getAllTasks().subscribe(tasks => {
+      this.tasks = tasks;
     });
   }
 
@@ -27,16 +28,19 @@ export class TasklistComponent implements OnInit{
     console.log('ionViewDidLoad Homepage');
   }
 
-  setTaskToDone(id){
-    alert("Task mit ID " +id + " ist erledigt!");
+  setTaskToDone(id) {
+    alert("Task mit ID " + id + " ist erledigt!");
   }
 
-  openTaskDetail(id){
-    alert("Task mit ID " +id + " wird geöffnet !");
+  openTaskDetail(task) {
+    this.navCtrl.push('TaskEditorPage', {
+      task: task,
+      editorMode: 'edit'
+    });
   }
 
-  deleteTask(id){
-    alert("Task mit ID " +id + " wird gelöscht");
+  deleteTask(id) {
+    alert("Task mit ID " + id + " wird gelöscht");
     this.taskProvider.deleteTask(id);
   }
 

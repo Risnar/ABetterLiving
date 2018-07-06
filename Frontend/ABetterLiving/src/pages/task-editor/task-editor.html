@@ -1,0 +1,62 @@
+<!--
+  Generated template for the TaskEditorPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>{{title}}</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-list>
+        <!--https://forum.ionicframework.com/t/forms-just-can-find-a-working-example/63453-->
+        <form (ngSubmit)="onSubmit()">
+            <ion-row>
+                <ion-item>
+                    <ion-label floating primary>Titel</ion-label>
+                    <ion-input [(ngModel)]="task.title" type="text" name="title" autocapitalize="off">
+                    </ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label floating primary>Beschreibung</ion-label>
+                    <ion-input [(ngModel)]="task.note" type="text" name="note" autocapitalize="off">
+                    </ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label floating primary>Priorität</ion-label>
+                    <ion-select [(ngModel)]="task.priority" name="priority">
+                        <ion-option value=1>schwach</ion-option>
+                        <ion-option value=2>mittel</ion-option>
+                        <ion-option value=3>hoch</ion-option>
+                    </ion-select>
+                </ion-item>
+                <ion-item>
+                    <ion-label floating primary>Geplanter Aufwand</ion-label>
+                    <ion-datetime displayFormat="hh:mm" name="requiredTime" [(ngModel)]="task.requiredTime"></ion-datetime>
+                </ion-item>
+                <ion-item>
+                    <ion-label floating primary>Abzuschliesen bis</ion-label>
+                    <ion-datetime displayFormat="DD MMMM YYYY" name="dueDate" [(ngModel)]="task.dueDate"></ion-datetime>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Status</ion-label>
+                    <ion-toggle [(ngModel)]="task.status" name="status"></ion-toggle>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Erfasst am</ion-label>
+                    {{task.creationDate}}
+                </ion-item>
+            </ion-row>
+            <ion-row>
+                <button ion-button class="submit-btn" type="submit">Speichern</button>
+                <button ion-button color="danger">Löschen</button>
+            </ion-row>
+        </form>
+    </ion-list>
+</ion-content>

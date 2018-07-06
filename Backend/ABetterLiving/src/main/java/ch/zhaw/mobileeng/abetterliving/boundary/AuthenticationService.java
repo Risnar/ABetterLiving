@@ -45,6 +45,7 @@ public class AuthenticationService {
             }
 
             AuthorizationToken token = jwtUtility.generate(authentication);
+            token.setUser(user);
             return ResponseHandler.response("Login status", "Login successful", "login", true, token);
         } catch (Exception e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();

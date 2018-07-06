@@ -15,6 +15,7 @@
  */
 package ch.zhaw.mobileeng.abetterliving.dto;
 
+import ch.zhaw.mobileeng.abetterliving.model.Users;
 import java.util.Date;
 import lombok.Data;
 
@@ -27,4 +28,5 @@ public class AuthorizationToken {
 
     private String token;
     private Date expiresAt;
+    private Users user;
 }

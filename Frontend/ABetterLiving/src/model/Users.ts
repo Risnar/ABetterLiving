@@ -1,9 +1,9 @@
 import { Task } from "./task";
 
 export interface Users {
-    UserID: number;
-    Username: string;
-    Email: string;
-    Password: string;
+    userID: number;
+    username: string;
+    email: string;
+    password: string;
     taskes: Task[];
 }
