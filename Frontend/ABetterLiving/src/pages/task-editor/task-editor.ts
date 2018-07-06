@@ -65,6 +65,8 @@ export class TaskEditorPage {
         } else {
           this.showAlert("Löschen fehlgeschlagen", 'Der Task wurde nicht erfolgreich angepasst.');
         }
+        //Auf die rootpage zurückkehren
+        this.navCtrl.popToRoot();
       },
         error => {
           console.log(error);
@@ -77,6 +79,10 @@ export class TaskEditorPage {
         } else {
           this.showAlert("Löschen fehlgeschlagen", 'Der Task wurde nicht erfolgreich gespeichert.');
         }
+        //Fügt den neuen Task dem arraylist aus dem parent hinzu
+        this.taskList.push(this.task);
+        //Auf die rootpage zurückkehren
+        this.navCtrl.popToRoot();
       },
         error => {
           console.log(error);
