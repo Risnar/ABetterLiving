@@ -14,11 +14,11 @@ import { GlobalVarsProvider } from '../providers/global-vars/global-vars';
 import { HomePageModule } from '../pages/home/home.module';
 import { AllTasksPageModule } from '../pages/all-tasks/all-tasks.module';
 import { TaskEditorPageModule } from '../pages/task-editor/task-editor.module';
-import { DatePipe } from '../../node_modules/@angular/common';
+
 
 @NgModule({
   declarations: [
-    MyApp
+    MyApp,
   ],
   imports: [
     BrowserModule,
@@ -27,7 +27,7 @@ import { DatePipe } from '../../node_modules/@angular/common';
     LoginPageModule,
     HomePageModule,
     AllTasksPageModule,
-    TaskEditorPageModule
+    TaskEditorPageModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -45,7 +45,6 @@ import { DatePipe } from '../../node_modules/@angular/common';
       multi: true
     },
     GlobalVarsProvider,
-    DatePipe
   ]
 })
 export class AppModule { }

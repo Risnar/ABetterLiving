@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Task } from '../../model/task';
 import { TaskProvider } from '../../providers/task/task';
 import { NavController, AlertController } from 'ionic-angular';
@@ -10,15 +10,13 @@ import { NavController, AlertController } from 'ionic-angular';
 export class TasklistComponent implements OnInit {
 
   private tasks: Array<Task> = [];
-  // listType: string = "Erledigt";
-  public listType: string;
+  @Input() listType: string;
   private currentDate: Date;
 
   constructor(
     public navCtrl: NavController,
     public alertCtrl: AlertController,
     private taskProvider: TaskProvider,
-    // public listType: string
   ) {
   }
 
@@ -33,7 +31,6 @@ export class TasklistComponent implements OnInit {
 
   getAllTasks(): void {
     this.taskProvider.getAllTasks().subscribe(tasks => {
-      // this.tasks = tasks;
       this.filterHandler(tasks);
     });
   }
@@ -45,17 +42,23 @@ export class TasklistComponent implements OnInit {
         this.tasks = tasks;
         break;
       case 'Erledigt':
-        this.filterTaskByStatus(tasks);
+        this.filterTaskByStatusDone(tasks);
         break;
-      // case 'Irgendwann':
-      //   this.filterTaskByDueDate(tasks);
-      //   break;
-      // case 'Heute':
-      //   this.filterTaskByDueDate(tasks);
-      //   break;
-      // case 'Wichtig':
-      //   this.filterTaskByPriority(tasks);
-      //   break;
+      case 'Unerledigt':
+        this.filterTaskByStatusUnDone(tasks);
+        break;
+      case 'Irgendwann':
+        this.filterTaskByDueDateSomewhen(tasks);
+        break;
+      case 'Heute':
+        this.filterTaskByDueDateToday(tasks);
+        break;
+      case 'Wichtig':
+        this.filterTaskByPriorityHigh(tasks);
+        break;
+      case 'Kalender':
+        this.filterTaskByPriorityHigh(tasks);
+        break;
       // case 'Unsortiert':
       //   // TODO
       //   break;
@@ -65,40 +68,48 @@ export class TasklistComponent implements OnInit {
     }
   }
 
-  public filterTaskByStatus(tasks) {
+  public filterTaskByStatusDone(tasks) {
     tasks.forEach(task => {
       if (task.status != 1) {
-        task.iconType = 'close-circle';
-        this.tasks.push(task);
-      } else {
         task.iconType = 'checkbox-outline';
         this.tasks.push(task);
       }
     });
   }
 
-  public filterTaskByDueDate() {
-    this.tasks.forEach(task => {
-
-      this.currentDate = new Date();
-
-      if (task.dueDate != null) {
-        task.iconType = 'copy';
+  public filterTaskByStatusUnDone(tasks) {
+    tasks.forEach(task => {
+      if (task.status = 1) {
+        task.iconType = 'close-circle';
         this.tasks.push(task);
       }
-      else if (task.dueDate === this.currentDate) {
+    });
+  }
+
+  public filterTaskByDueDateToday(tasks) {
+    this.tasks.forEach(task => {
+      this.currentDate = new Date;
+      if (task.dueDate === this.currentDate) {
         task.iconType = 'clipboard';
         this.tasks.push(task);
       }
     });
   }
-  public filterTaskByPriority(tasks) {
-    tasks.forEach(task => {
-      if (task.priority = 0) {
-        task.iconType = 'close-circle'
+
+  public filterTaskByDueDateSomewhen(tasks) {
+    this.tasks.forEach(task => {
+      this.currentDate = new Date();
+      if (task.dueDate != null) {
+        task.iconType = 'copy';
         this.tasks.push(task);
-      } else if (task.priority = 1) {
-        task.iconType = 'checkbox-outline'
+      }
+    });
+  }
+
+  public filterTaskByPriorityHigh(tasks) {
+    tasks.forEach(task => {
+      if (task.priority != 0) {
+        task.iconType = 'flash'
         this.tasks.push(task);
       }
     });

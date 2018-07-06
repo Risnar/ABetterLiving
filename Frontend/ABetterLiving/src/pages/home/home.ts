@@ -18,7 +18,10 @@ export class HomePage {
     public globalVars: GlobalVarsProvider
   ) {
     this.user = globalVars.getActiveUser();
+    // this.listType = globalVars.getListType();
   }
+
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad Homepage');

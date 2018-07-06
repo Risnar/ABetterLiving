@@ -26,12 +26,3 @@
         </ion-item-options>
     </ion-item-sliding>
 </ion-list>
-<ion-list>
-    <ion-item-sliding ng-if="page == 'home'" *ngFor="let task of tasks">
-        <ion-item>
-            <ion-icon name="{{task.iconType}}" item-start></ion-icon>
-            <h2>{{task.title}}</h2>
-            <p>{{task.note}}</p>
-        </ion-item>
-    </ion-item-sliding>
-</ion-list>

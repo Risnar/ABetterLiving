@@ -6,6 +6,13 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { AllTasksPage } from '../pages/all-tasks/all-tasks';
+import { TaskTodayComponent } from '../components/task-today/task-today';
+import { TaskSomewhenComponent } from '../components/task-somewhen/task-somewhen';
+import { TaskOnholdComponent } from '../components/task-onhold/task-onhold';
+import { TaskDoneComponent } from '../components/task-done/task-done';
+import { TaskScheduledComponent } from '../components/task-scheduled/task-scheduled';
+import { ComponentsModule } from '../components/components.module';
+
 
 @Component({
   templateUrl: 'app.html'
@@ -20,7 +27,8 @@ export class MyApp {
   constructor(
     public platform: Platform,
     public statusBar: StatusBar,
-    public splashScreen: SplashScreen
+    public splashScreen: SplashScreen,
+    public component: ComponentsModule
   ) {
     this.initializeApp();
 
@@ -28,10 +36,12 @@ export class MyApp {
     this.pages = [
       { title: 'Home', icon: 'home', component: HomePage },
       { title: 'Alle', icon: 'apps', component: AllTasksPage },
-      { title: 'Heute', icon: 'clock', component: HomePage },
-      { title: 'Markiert', icon: 'star', component: HomePage },
-      { title: 'Projekte', icon: 'folder-open', component: HomePage },
-      { title: 'Erledigt', icon: 'checkmark-circle', component: HomePage }
+      { title: 'Heute', icon: 'clock', component: TaskTodayComponent },
+      { title: 'Irgendwann', icon: 'help-circle', component: TaskSomewhenComponent },
+      { title: 'Warten auf', icon: 'pause', component: TaskOnholdComponent },
+      { title: 'Erledigt', icon: 'checkbox-outline', component: TaskDoneComponent },
+      { title: 'Kalender', icon: 'calendar', component: TaskScheduledComponent }
+
     ];
 
   }

@@ -12,6 +12,7 @@ import { User } from '../../model/user';
 export class GlobalVarsProvider {
 
   private activeUser: User;
+  // public listType: string;
 
   constructor() {
   }
@@ -33,5 +34,12 @@ export class GlobalVarsProvider {
       } as User;
     }
   }
+
+  // setListType(value) {
+  //   this.listType = value;
+  // }
+  // getListType() {
+  //   return this.listType;
+  // }
 
 }
