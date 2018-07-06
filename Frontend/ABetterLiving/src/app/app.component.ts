@@ -54,11 +54,4 @@ export class MyApp {
 
   }
 
-  public openTaskEditor() {
-    this.nav.push('TaskEditorPage', {
-      task: null,
-      editorMode: 'new'
-    });
-  }
-
 }

@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 import { Task } from '../../model/task';
 import { SrvResponse } from '../../model/srvResponse'
 import { TaskProvider } from '../../providers/task/task';
+import { isDefined } from 'ionic-angular/umd/util/util';
 
 /**
  * Generated class for the TaskEditorPage page.
@@ -27,8 +28,10 @@ export class TaskEditorPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder, public alertCtrl: AlertController, private taskProvider: TaskProvider) {
     console.log(this);
-    if (navParams.data.editorMode == "edit") {
+    if (navParams.data.taskList !== undefined) {
       this.taskList = navParams.data.taskList;
+    }
+    if (navParams.data.editorMode == "edit") {
       this.task = navParams.data.task;
       this.title = navParams.data.task.title;
     } else {
@@ -57,16 +60,15 @@ export class TaskEditorPage {
   }
 
   onSubmit() {
-    console.log("save");
     if (this.navParams.data.editorMode == "edit") {
       this.taskProvider.updateTask(this.task).subscribe(response => {
         if (response.successful) {
-          this.showAlert("Löschen fehlgeschlagen", 'Der Task wurde erfolgreich angepasst.');
+          this.showAlert("Task angepasst", 'Der Task wurde erfolgreich angepasst.');
+          //Auf die rootpage zurückkehren
+          this.navCtrl.popToRoot();
         } else {
-          this.showAlert("Löschen fehlgeschlagen", 'Der Task wurde nicht erfolgreich angepasst.');
+          this.showAlert("Anpassung fehlgeschlagen", 'Der Task wurde nicht erfolgreich angepasst.');
         }
-        //Auf die rootpage zurückkehren
-        this.navCtrl.popToRoot();
       },
         error => {
           console.log(error);
@@ -75,14 +77,16 @@ export class TaskEditorPage {
     } else {
       this.taskProvider.addTask(this.task).subscribe(response => {
         if (response.successful) {
-          this.showAlert("Löschen fehlgeschlagen", 'Der Task wurde erfolgreich gespeichert.');
+          this.showAlert("Task hinzugefügt", 'Der Task wurde erfolgreich gespeichert.');
+          //Fügt den neuen Task dem arraylist aus dem parent hinzu
+          if (this.taskList !== undefined) {
+            this.taskList.push(this.task);
+          }
+          //Auf die rootpage zurückkehren
+          this.navCtrl.popToRoot();
         } else {
-          this.showAlert("Löschen fehlgeschlagen", 'Der Task wurde nicht erfolgreich gespeichert.');
+          this.showAlert("Speichern fehlgeschlagen", 'Der Task wurde nicht erfolgreich gespeichert.');
         }
-        //Fügt den neuen Task dem arraylist aus dem parent hinzu
-        this.taskList.push(this.task);
-        //Auf die rootpage zurückkehren
-        this.navCtrl.popToRoot();
       },
         error => {
           console.log(error);
@@ -94,10 +98,12 @@ export class TaskEditorPage {
   public deleteTask() {
     this.taskProvider.deleteTask(this.task).subscribe(response => {
       if (response.successful) {
-        this.showAlert("Löschen fehlgeschlagen", 'Der Task wurde erfolgreich gelöscht.');
+        this.showAlert("Löschen erfolgreich", 'Der Task wurde erfolgreich gelöscht.');
         //Entfernt den task aus dem tasklist array welches vom parent übergeben wurde.
-        const idx = this.taskList.indexOf(this.task);
-        this.taskList.splice(idx, 1);
+        if (this.taskList !== undefined) {
+          const idx = this.taskList.indexOf(this.task);
+          this.taskList.splice(idx, 1);
+        }
         //Auf die rootpage zurückkehren
         this.navCtrl.popToRoot();
       } else {

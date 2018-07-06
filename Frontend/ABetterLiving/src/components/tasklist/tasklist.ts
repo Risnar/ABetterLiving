@@ -18,14 +18,23 @@ export class TasklistComponent implements OnInit {
     this.getAllTasks();
   }
 
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad Homepage');
+  }
+
+
   getAllTasks(): void {
     this.taskProvider.getAllTasks().subscribe(tasks => {
       this.tasks = tasks;
     });
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad Homepage');
+  public openTaskEditor() {
+    this.navCtrl.push('TaskEditorPage', {
+      task: null,
+      taskList: this.tasks,
+      editorMode: 'new'
+    });
   }
 
   setTaskToDone(id) {
