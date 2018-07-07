@@ -11,7 +11,11 @@ export class TasklistComponent implements OnInit {
 
   private tasks: Array<Task> = [];
   @Input() listType: string;
-  private currentDate: Date;
+  // @Input() currentDate: string = new Date().toISOString();
+
+  public date = new Date();
+  @Input() currentDateCombined: number = (this.date.getDate() + (this.date.getMonth() + 1) + this.date.getFullYear());
+  @Input() dueDateCombined: number;
 
   constructor(
     public navCtrl: NavController,
@@ -39,6 +43,7 @@ export class TasklistComponent implements OnInit {
 
     switch (this.listType) {
       case 'Alle':
+        tasks.iconType = 'checkbox-outline';
         this.tasks = tasks;
         break;
       case 'Erledigt':
@@ -79,7 +84,7 @@ export class TasklistComponent implements OnInit {
 
   public filterTaskByStatusUnDone(tasks) {
     tasks.forEach(task => {
-      if (task.status = 1) {
+      if (task.status == 1) {
         task.iconType = 'close-circle';
         this.tasks.push(task);
       }
@@ -88,8 +93,8 @@ export class TasklistComponent implements OnInit {
 
   public filterTaskByDueDateToday(tasks) {
     this.tasks.forEach(task => {
-      this.currentDate = new Date;
-      if (task.dueDate === this.currentDate) {
+      this.dueDateCombined = (task.dueDate.getDate() + task.dueDate.getMonth() + task.dueDate.getFullYear());
+      if (this.dueDateCombined === this.currentDateCombined) {
         task.iconType = 'clipboard';
         this.tasks.push(task);
       }
@@ -98,9 +103,8 @@ export class TasklistComponent implements OnInit {
 
   public filterTaskByDueDateSomewhen(tasks) {
     this.tasks.forEach(task => {
-      this.currentDate = new Date();
-      if (task.dueDate != null) {
-        task.iconType = 'copy';
+      if (task.dueDate == null) {
+        task.iconType = 'help-circle';
         this.tasks.push(task);
       }
     });
@@ -125,6 +129,7 @@ export class TasklistComponent implements OnInit {
   }
 
   setTaskToDone(task) {
+    // TODO Swap zwischen Done / Undone -> Grün / Rot
     task.status = 0 ? 1 : 0;
 
     this.taskProvider.updateTask(task).subscribe(response => {
