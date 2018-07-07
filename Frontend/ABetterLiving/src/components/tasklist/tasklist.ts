@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Task } from '../../model/task';
 import { TaskProvider } from '../../providers/task/task';
-import { NavController, AlertController } from 'ionic-angular';
+import { NavController, AlertController, NavParams } from 'ionic-angular';
 import { NativeAudio } from '@ionic-native/native-audio';
 
 @Component({
@@ -18,7 +18,10 @@ export class TasklistComponent implements OnInit {
     public navCtrl: NavController,
     public alertCtrl: AlertController,
     private taskProvider: TaskProvider,
-    private nativeAudio: NativeAudio) { }
+    private nativeAudio: NativeAudio,
+    // @Input() navParams: NavParams,
+    
+  ) { }
 
   ngOnInit() {
     this.getAllTasks();
@@ -54,8 +57,7 @@ export class TasklistComponent implements OnInit {
 
     switch (this.listType) {
       case 'Alle':
-        tasks.iconType = 'checkbox-outline';
-        this.tasks = tasks;
+        this.filterTaskAll(tasks);
         break;
       case 'Erledigt':
         this.filterTaskByStatusDone(tasks);
@@ -63,15 +65,15 @@ export class TasklistComponent implements OnInit {
       case 'Unerledigt':
         this.filterTaskByStatusUnDone(tasks);
         break;
-      case 'Irgendwann':
-        this.filterTaskByDueDateSomewhen(tasks);
-        break;
+      // case 'Irgendwann':
+      //   this.filterTaskByDueDateSomewhen(tasks);
+      //   break;
       case 'Heute':
         this.filterTaskByDueDateToday(tasks);
         break;
-      case 'Wichtig':
-        this.filterTaskByPriorityHigh(tasks);
-        break;
+      // case 'Wichtig':
+      //   this.filterTaskByPriorityHigh(tasks);
+      //   break;
       case 'Kalender':
         this.filterTaskByPriorityHigh(tasks);
         break;
@@ -84,9 +86,15 @@ export class TasklistComponent implements OnInit {
     }
   }
 
+  public filterTaskAll(tasks) {
+    tasks.forEach(task => {
+      this.tasks.push(task);
+    });
+  }
+
   public filterTaskByStatusDone(tasks) {
     tasks.forEach(task => {
-      if (task.status != 1) {
+      if (task.status == true) {
         //task.iconType = 'checkbox-outline';
         this.tasks.push(task);
       }
@@ -95,7 +103,7 @@ export class TasklistComponent implements OnInit {
 
   public filterTaskByStatusUnDone(tasks) {
     tasks.forEach(task => {
-      if (task.status == 1) {
+      if (task.status == false) {
         //task.iconType = 'close-circle';
         this.tasks.push(task);
       }
@@ -113,14 +121,14 @@ export class TasklistComponent implements OnInit {
     });
   }
 
-  public filterTaskByDueDateSomewhen(tasks) {
-    tasks.forEach(task => {
-      if (task.dueDate == null) {
-        //task.iconType = 'md-help';
-        this.tasks.push(task);
-      }
-    });
-  }
+  // public filterTaskByDueDateSomewhen(tasks) {
+  //   tasks.forEach(task => {
+  //     if (task.dueDate == null) {
+  //       //task.iconType = 'md-help';
+  //       this.tasks.push(task);
+  //     }
+  //   });
+  // }
 
   public filterTaskByPriorityHigh(tasks) {
     tasks.forEach(task => {
@@ -143,8 +151,12 @@ export class TasklistComponent implements OnInit {
   }
 
   setTaskToDone(task) {
-    // TODO Swap zwischen Done / Undone -> Grün / Rot
-    task.status = 0 ? 1 : 0;
+    // task.status = false ? true : false;
+    if (task.status === false) {
+      task.status = true;
+    } else if (task.status === true) {
+      task.status = false;
+    }
 
     this.taskProvider.updateTask(task).subscribe(response => {
       if (response.successful) {

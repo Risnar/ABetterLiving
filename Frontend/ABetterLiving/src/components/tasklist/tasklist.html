@@ -1,28 +1,38 @@
 <ion-fab right bottom>
     <button ion-fab color="secondary" (click)="openTaskEditor()">
-    <ion-icon name="add"></ion-icon>
-  </button>
+        <ion-icon name="add"></ion-icon>
+    </button>
 </ion-fab>
 <ion-list>
     <ion-item-sliding *ngFor="let task of tasks">
         <ion-item>
-            <ion-icon name="flame" item-start></ion-icon>
+            <!-- <ion-icon *ngIf="this.navCtrl.getActive() === 'home'" name="close-circle" item-start></ion-icon>
+            <ion-icon *ngIf="navCtrl.getActive() === '/#/all-tasks'" name="checkbox-circle" item-start></ion-icon> -->
+            <!-- <ion-icon *ngIf="rootpage === task-done" name="checkbox-outline" item-start></ion-icon>
+            <ion-icon *ngIf="rootpage === task-today" name="flame" item-start></ion-icon>
+            <ion-icon *ngIf="rootpage === task-scheduled" name="calendar" item-start></ion-icon> -->
             <h2>{{task.title}}</h2>
             <p>{{task.note}}</p>
+            <p>{{task.status}}</p>
+
         </ion-item>
         <ion-item-options side="right">
-            <button ion-button color="secondary" (click)="setTaskToDone(task)">
-        <ion-icon name="checkmark-circle"></ion-icon>
-        Done
-      </button>
+            <button *ngIf="task.status === false" ion-button color="secondary" (click)="setTaskToDone(task)">
+                <ion-icon name="checkmark-circle"></ion-icon>
+                Done
+            </button>
+            <button *ngIf="task.status === true" ion-button color="danger" (click)="setTaskToDone(task)">
+                <ion-icon name="close-circle"></ion-icon>
+                Undone
+            </button>
             <button ion-button color="primary" (click)="openTaskDetail(task)">
-        <ion-icon name="eye"></ion-icon>
-        Edit
-      </button>
+                <ion-icon name="eye"></ion-icon>
+                Edit
+            </button>
             <button ion-button color="danger" (click)="deleteTask(task)">
-        <ion-icon name="trash"></ion-icon>
-        Del
-      </button>
+                <ion-icon name="trash"></ion-icon>
+                Del
+            </button>
         </ion-item-options>
     </ion-item-sliding>
 </ion-list>

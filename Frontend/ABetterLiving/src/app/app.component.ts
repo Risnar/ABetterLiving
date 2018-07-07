@@ -7,8 +7,6 @@ import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { AllTasksPage } from '../pages/all-tasks/all-tasks';
 import { TaskTodayPage } from '../pages/task-today/task-today';
-import { TaskSomewhenPage } from '../pages/task-somewhen/task-somewhen';
-import { TaskOnholdPage } from '../pages/task-onhold/task-onhold';
 import { TaskDonePage } from '../pages/task-done/task-done';
 import { TaskScheduledPage } from '../pages/task-scheduled/task-scheduled';
 
@@ -20,20 +18,33 @@ export class MyApp {
 
   rootPage: any = LoginPage;
 
+  // pages: any[] = [
+  //   { title: 'Home', icon: 'home', component: 'HomePage' },
+  //   { title: 'Alle', icon: 'apps', component: 'AllTasksPage' },
+  //   { title: 'Heute', icon: 'clock', component: 'TaskTodayPage' },
+  //   { title: 'Erledigt', icon: 'checkbox-outline', component: 'TaskDonePage' },
+  //   { title: 'Kalender', icon: 'calendar', component: 'TaskScheduledPage' }
+  // ]
+
+  // constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  //   this.initializeApp();
+  // }
   pages: Array<{ title: string, icon: string, component: any }>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(
+    public platform: Platform,
+    public statusBar: StatusBar,
+    public splashScreen: SplashScreen,
+  ) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', icon: 'home', component: HomePage },
-      { title: 'Alle', icon: 'apps', component: AllTasksPage },
-      { title: 'Heute', icon: 'clock', component: TaskTodayPage },
-      { title: 'Irgendwann', icon: 'help-circle', component: TaskSomewhenPage },
-      { title: 'Warten auf', icon: 'pause', component: TaskOnholdPage },
-      { title: 'Erledigt', icon: 'checkbox-outline', component: TaskDonePage },
-      { title: 'Kalender', icon: 'calendar', component: TaskScheduledPage }
+      { title: 'Home', icon: 'home', component: 'HomePage' },
+      { title: 'Alle', icon: 'apps', component: 'AllTasksPage' },
+      { title: 'Heute', icon: 'clock', component: 'TaskTodayPage' },
+      { title: 'Erledigt', icon: 'checkbox-outline', component: 'TaskDonePage' },
+      { title: 'Kalender', icon: 'calendar', component: 'TaskScheduledPage' }
 
     ];
 

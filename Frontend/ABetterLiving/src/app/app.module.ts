@@ -15,12 +15,10 @@ import { HomePageModule } from '../pages/home/home.module';
 import { AllTasksPageModule } from '../pages/all-tasks/all-tasks.module';
 import { TaskEditorPageModule } from '../pages/task-editor/task-editor.module';
 import { NativeAudio } from '@ionic-native/native-audio';
-import { SmartAudioProvider } from '../providers/smart-audio/smart-audio';
+// import { SmartAudioProvider } from '../providers/smart-audio/smart-audio';
 import { TaskDonePageModule } from '../pages/task-done/task-done.module';
 import { TaskTodayPageModule } from '../pages/task-today/task-today.module';
-import { TaskOnholdPageModule } from '../pages/task-onhold/task-onhold.module';
 import { TaskScheduledPageModule } from '../pages/task-scheduled/task-scheduled.module';
-import { TaskSomewhenPageModule } from '../pages/task-somewhen/task-somewhen.module';
 
 
 @NgModule({
@@ -37,15 +35,11 @@ import { TaskSomewhenPageModule } from '../pages/task-somewhen/task-somewhen.mod
     TaskEditorPageModule,
     TaskDonePageModule,
     TaskTodayPageModule,
-    TaskOnholdPageModule,
     TaskScheduledPageModule,
-    TaskSomewhenPageModule,
-
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp
-
   ],
   providers: [
     StatusBar,
@@ -59,7 +53,7 @@ import { TaskSomewhenPageModule } from '../pages/task-somewhen/task-somewhen.mod
       multi: true
     },
     GlobalVarsProvider,
-    NativeAudio
+    NativeAudio,
   ]
 })
 export class AppModule { }

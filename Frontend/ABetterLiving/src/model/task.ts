@@ -1,4 +1,3 @@
-import { DateTime } from "ionic-angular/umd";
 import { List } from "./list";
 import { User } from "./user";
 
@@ -10,9 +9,8 @@ export interface Task {
     requiredTime: string;
     dueDate: string;
     creationDate: string;
-    status: number;
+    status: boolean;
     list: List;
     project: List;
     owner: User;
-    userses: User[];
 }

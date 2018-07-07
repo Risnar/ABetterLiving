@@ -68,22 +68,22 @@ public class ABetterLiving extends ResourceConfig {
             userRepository.save(u);
             u = new Users();
             u.setEmail("raphael@fuchs.hei");
-            u.setUsername("raphaelfuchs");
+            u.setUsername("raphael");
             u.setAndHashPassword("ex");
             userRepository.save(u);
             u = new Users();
-            u.setEmail("jannick@meier.hei");
-            u.setUsername("yannickmeier");
+            u.setEmail("jannik@meier.hei");
+            u.setUsername("jannik");
             u.setAndHashPassword("ex");
             userRepository.save(u);
             u = new Users();
             u.setEmail("matthias@zehnder.hei");
-            u.setUsername("matthiaszehnder");
+            u.setUsername("matthias");
             u.setAndHashPassword("ex");
             userRepository.save(u);
             u = new Users();
             u.setEmail("julian@herrmann.hei");
-            u.setUsername("julianhermann");
+            u.setUsername("julian");
             u.setAndHashPassword("ex");
             userRepository.save(u);
             //Example lists
@@ -105,24 +105,61 @@ public class ABetterLiving extends ResourceConfig {
             t.setRequiredTime(new Date());
             t.setStatus(false);
             taskRepository.save(t);
-            //Add project
-            Lists p = new Lists();
-            p.setName("Hausbau Roggenstrasse");
-            p.setType("project");
-            p.setUser(u);
-            listRepository.save(p);
+
             //Example tasks
             t = new Tasks();
             t.setTitle("Architekten suchen");
             t.setNote("Suche einen exkulsiven Architekten.");
             t.setOwner(u);
-            t.setProject(p);
             t.setPriority(3);
             t.setStatus(false);
             t.setRequiredTime(new Date());
             t.setDueDate(new Date());
             t.setCreationDate(new Date());
             taskRepository.save(t);
+
+            //Example tasks
+            t = new Tasks();
+            t.setTitle("Task 1 und 2 erledigen");
+            t.setNote("Für einen geordneten Ablauf müssen natürlich die vorherigen Tasks erledigt werden.");
+            t.setOwner(u);
+            t.setPriority(2);
+            t.setStatus(false);
+            t.setRequiredTime(new Date());
+            t.setDueDate(new Date());
+            t.setCreationDate(new Date());
+            taskRepository.save(t);
+
+            //Example tasks
+            t = new Tasks();
+            t.setTitle("Richtige App für ToDo-Liste installieren");
+            t.setNote("Diese App taugt kaum zum täglichen Gebrauch.");
+            t.setOwner(u);
+            t.setPriority(2);
+            t.setStatus(false);
+            t.setRequiredTime(new Date());
+            t.setDueDate(new Date());
+            t.setCreationDate(new Date());
+            taskRepository.save(t);
+
+            //Example tasks
+            t = new Tasks();
+            t.setTitle("Updates installieren");
+            t.setNote("Sicherheitsupdates sind wichtig und sollte immer SOFORT installiert werden.");
+            t.setOwner(u);
+            t.setPriority(1);
+            t.setStatus(true);
+            t.setRequiredTime(new Date());
+            t.setDueDate(new Date());
+            t.setCreationDate(new Date());
+            taskRepository.save(t);
+
+            //Add project
+            Lists p = new Lists();
+            p.setName("Hausbau Roggenstrasse");
+            p.setType("project");
+            p.setUser(u);
+            listRepository.save(p);
         };
     }
 }

@@ -44,7 +44,7 @@ export class TaskEditorPage {
         requiredTime: '00:00',
         dueDate: new Date().toISOString(),
         creationDate: new Date().toISOString(),
-        status: 0,
+        status: false,
         list: null,
         project: null,
         owner: null
