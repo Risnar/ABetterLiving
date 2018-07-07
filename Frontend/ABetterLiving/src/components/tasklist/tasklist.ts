@@ -11,11 +11,6 @@ export class TasklistComponent implements OnInit {
 
   private tasks: Array<Task> = [];
   @Input() listType: string;
-  // @Input() currentDate: string = new Date().toISOString();
-
-  public date = new Date();
-  @Input() currentDateCombined: number = (this.date.getDate() + (this.date.getMonth() + 1) + this.date.getFullYear());
-  @Input() dueDateCombined: number;
 
   constructor(
     public navCtrl: NavController,
@@ -92,19 +87,20 @@ export class TasklistComponent implements OnInit {
   }
 
   public filterTaskByDueDateToday(tasks) {
-    this.tasks.forEach(task => {
-      this.dueDateCombined = (task.dueDate.getDate() + task.dueDate.getMonth() + task.dueDate.getFullYear());
-      if (this.dueDateCombined === this.currentDateCombined) {
-        task.iconType = 'clipboard';
+    var today = new Date();
+    tasks.forEach(task => {
+      var taskDueDate = new Date(task.dueDate);
+      if (today.setHours(0, 0, 0, 0) == taskDueDate.setHours(0, 0, 0, 0)) {
+        task.iconType = 'flame';
         this.tasks.push(task);
       }
     });
   }
 
   public filterTaskByDueDateSomewhen(tasks) {
-    this.tasks.forEach(task => {
+    tasks.forEach(task => {
       if (task.dueDate == null) {
-        task.iconType = 'help-circle';
+        task.iconType = 'md-help';
         this.tasks.push(task);
       }
     });
