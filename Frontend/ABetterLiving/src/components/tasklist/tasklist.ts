@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Task } from '../../model/task';
 import { TaskProvider } from '../../providers/task/task';
 import { NavController, AlertController } from 'ionic-angular';
@@ -10,8 +10,9 @@ import { NativeAudio } from '@ionic-native/native-audio';
 })
 export class TasklistComponent implements OnInit {
 
-  private tasks: Array<Task>;
   private openSoundArray: Array<string> = ['yeah', 'woohoo', 'unbelievable'];
+  private tasks: Array<Task> = [];
+  @Input() listType: string;
 
   constructor(
     public navCtrl: NavController,
@@ -26,7 +27,7 @@ export class TasklistComponent implements OnInit {
 
   getAllTasks(): void {
     this.taskProvider.getAllTasks().subscribe(tasks => {
-      this.tasks = tasks;
+      this.filterHandler(tasks);
       this.playTaskNotification(tasks.length);
     });
   }
@@ -48,6 +49,89 @@ export class TasklistComponent implements OnInit {
     }
   }
 
+
+  public filterHandler(tasks) {
+
+    switch (this.listType) {
+      case 'Alle':
+        tasks.iconType = 'checkbox-outline';
+        this.tasks = tasks;
+        break;
+      case 'Erledigt':
+        this.filterTaskByStatusDone(tasks);
+        break;
+      case 'Unerledigt':
+        this.filterTaskByStatusUnDone(tasks);
+        break;
+      case 'Irgendwann':
+        this.filterTaskByDueDateSomewhen(tasks);
+        break;
+      case 'Heute':
+        this.filterTaskByDueDateToday(tasks);
+        break;
+      case 'Wichtig':
+        this.filterTaskByPriorityHigh(tasks);
+        break;
+      case 'Kalender':
+        this.filterTaskByPriorityHigh(tasks);
+        break;
+      // case 'Unsortiert':
+      //   // TODO
+      //   break;
+      // case 'Warten auf':
+      //   // abhängig von anderem User
+      //   break;
+    }
+  }
+
+  public filterTaskByStatusDone(tasks) {
+    tasks.forEach(task => {
+      if (task.status != 1) {
+        task.iconType = 'checkbox-outline';
+        this.tasks.push(task);
+      }
+    });
+  }
+
+  public filterTaskByStatusUnDone(tasks) {
+    tasks.forEach(task => {
+      if (task.status == 1) {
+        task.iconType = 'close-circle';
+        this.tasks.push(task);
+      }
+    });
+  }
+
+  public filterTaskByDueDateToday(tasks) {
+    var today = new Date();
+    tasks.forEach(task => {
+      var taskDueDate = new Date(task.dueDate);
+      if (today.setHours(0, 0, 0, 0) == taskDueDate.setHours(0, 0, 0, 0)) {
+        task.iconType = 'flame';
+        this.tasks.push(task);
+      }
+    });
+  }
+
+  public filterTaskByDueDateSomewhen(tasks) {
+    tasks.forEach(task => {
+      if (task.dueDate == null) {
+        task.iconType = 'md-help';
+        this.tasks.push(task);
+      }
+    });
+  }
+
+  public filterTaskByPriorityHigh(tasks) {
+    tasks.forEach(task => {
+      if (task.priority != 0) {
+        task.iconType = 'flash'
+        this.tasks.push(task);
+      }
+    });
+  }
+
+
   public openTaskEditor() {
     this.navCtrl.push('TaskEditorPage', {
       task: null,
@@ -58,8 +142,22 @@ export class TasklistComponent implements OnInit {
     this.nativeAudio.play('doyourbest');
   }
 
-  setTaskToDone(id) {
-    alert("Task mit ID " + id + " ist erledigt!");
+  setTaskToDone(task) {
+    // TODO Swap zwischen Done / Undone -> Grün / Rot
+    task.status = 0 ? 1 : 0;
+
+    this.taskProvider.updateTask(task).subscribe(response => {
+      if (response.successful) {
+        this.showAlert("Task angepasst", 'Task wurde als erledigt markiert!');
+        //Auf die rootpage zurückkehren
+      } else {
+        this.showAlert("Anpassung fehlgeschlagen", 'Der Task wurde nicht erfolgreich angepasst.');
+      }
+    },
+      error => {
+        console.log(error);
+        this.showAlert("Fehler", 'Beim speichern ist ein Fehler aufgetreten. ' + error);
+      });
   }
 
   openTaskDetail(task) {

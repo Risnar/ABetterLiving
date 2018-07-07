@@ -1,0 +1,9 @@
+diff a/Frontend/ABetterLiving/src/pages/task-editor/task-editor.ts b/Frontend/ABetterLiving/src/pages/task-editor/task-editor.ts	(rejected hunks)
+@@ -41,7 +41,6 @@
+         title: "",
+         note: "",
+         priority: 0,
+-        requiredTime: null,
+         requiredTime: '00:00',
+         dueDate: new Date().toISOString(),
+         creationDate: new Date().toISOString(),

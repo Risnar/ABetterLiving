@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { HomePage } from './home';
+import { TaskDonePage } from './task-done';
 import { ComponentsModule } from '../../components/components.module';
 
 @NgModule({
   declarations: [
-    HomePage
+    TaskDonePage
   ],
   imports: [
-    IonicPageModule.forChild(HomePage),
+    IonicPageModule.forChild(TaskDonePage),
     ComponentsModule
   ],
 })
-export class HomePageModule { }
+export class TaskDonePageModule {}

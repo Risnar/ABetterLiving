@@ -14,6 +14,7 @@
 
 
 <ion-content padding>
+<<<<<<< HEAD
     <div class="login-box" style="background: white; opacity: .95;">
         <form (ngSubmit)="login()" #registerForm="ngForm">
             <ion-row>
@@ -36,4 +37,24 @@
 
         </form>
     </div>
+=======
+  <div class="login-box" style="background: white; opacity: .95;">
+    <form (ngSubmit)="login()" #registerForm="ngForm">
+      <ion-row>
+        <ion-item>
+          <ion-input type="text" placeholder="Username" name="username" [(ngModel)]="username" required></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input type="password" placeholder="Password" name="password" [(ngModel)]="password" required></ion-input>
+        </ion-item>
+      </ion-row>
+      <ion-row>
+        <ion-col class="signup-col">
+          <button ion-button class="submit-btn" full type="submit" [disabled]="!registerForm.form.valid">Login</button>
+        </ion-col>
+      </ion-row>
+
+    </form>
+  </div>
+>>>>>>> Frontend-Julian
 </ion-content>

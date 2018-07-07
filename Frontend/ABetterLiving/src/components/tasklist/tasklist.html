@@ -1,36 +1,28 @@
 <ion-fab right bottom>
-    <button ion-fab color="secondary">
-    <ion-icon name="add"></ion-icon>
-  </button>
-    <ion-fab-list side="left">
-        <button ion-fab (click)="openTaskEditor()">
-      <ion-icon name="document"></ion-icon>
+    <button ion-fab color="secondary" (click)="openTaskEditor()">
+        <ion-icon name="add"></ion-icon>
     </button>
-        <button ion-fab>
-      <ion-icon name="folder-open"></ion-icon>
-    </button>
-    </ion-fab-list>
 </ion-fab>
 <ion-list>
     <ion-item-sliding *ngFor="let task of tasks">
         <ion-item>
-            <ion-icon name="checkbox-outline" item-start></ion-icon>
+            <ion-icon name="{{task.iconType}}" item-start></ion-icon>
             <h2>{{task.title}}</h2>
             <p>{{task.note}}</p>
         </ion-item>
         <ion-item-options side="right">
             <button ion-button color="secondary" (click)="setTaskToDone(task)">
-        <ion-icon name="checkmark-circle"></ion-icon>
-        Done
-      </button>
+                <ion-icon name="checkmark-circle"></ion-icon>
+                Done
+            </button>
             <button ion-button color="primary" (click)="openTaskDetail(task)">
-        <ion-icon name="eye"></ion-icon>
-        Edit
-      </button>
+                <ion-icon name="eye"></ion-icon>
+                Edit
+            </button>
             <button ion-button color="danger" (click)="deleteTask(task)">
-        <ion-icon name="trash"></ion-icon>
-        Del
-      </button>
+                <ion-icon name="trash"></ion-icon>
+                Del
+            </button>
         </ion-item-options>
     </ion-item-sliding>
 </ion-list>

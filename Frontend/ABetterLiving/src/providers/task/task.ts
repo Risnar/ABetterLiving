@@ -15,7 +15,9 @@ export class TaskProvider {
 
   private tasksUrl = 'http://localhost:8080/task';  // URL to web api
 
-  constructor(public http: HttpClient) {
+  constructor(
+    public http: HttpClient
+  ) {
 
   }
 
@@ -48,5 +50,6 @@ export class TaskProvider {
     const url = `${this.tasksUrl}/${id}`;
     return this.http.delete<SrvResponse>(url, httpOptions);
   }
+
 
 }

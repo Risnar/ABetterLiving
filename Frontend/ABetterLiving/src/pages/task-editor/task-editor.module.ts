@@ -10,4 +10,4 @@ import { TaskEditorPage } from './task-editor';
     IonicPageModule.forChild(TaskEditorPage),
   ],
 })
-export class TaskEditorPageModule {}
+export class TaskEditorPageModule { }
