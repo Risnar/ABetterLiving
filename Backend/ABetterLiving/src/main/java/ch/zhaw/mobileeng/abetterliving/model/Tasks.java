@@ -58,7 +58,7 @@ public class Tasks {
     private Date creationDate;
 
     @Basic
-    private Integer status;
+    private Boolean status;
 
     @ManyToOne
     private Lists list;

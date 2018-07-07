@@ -66,7 +66,7 @@ export class TaskEditorPage {
         if (response.successful) {
           this.showAlert("Task angepasst", 'Der Task wurde erfolgreich angepasst.');
           //-->Play sound
-          this.nativeAudio.play('thatsit');
+          this.nativeAudio.play('nicework');
           //Auf die rootpage zurückkehren
           this.navCtrl.popToRoot();
         } else {
@@ -86,7 +86,7 @@ export class TaskEditorPage {
         if (response.successful) {
           this.showAlert("Task hinzugefügt", 'Der Task wurde erfolgreich gespeichert.');
           //-->Play sound
-          this.nativeAudio.play('thatsit');
+          this.nativeAudio.play('nicework');
           //Fügt den neuen Task dem arraylist aus dem parent hinzu
           if (this.taskList !== undefined) {
             this.taskList.push(response.data as Task);

@@ -6,6 +6,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { AllTasksPage } from '../pages/all-tasks/all-tasks';
+import { TaskTodayPage } from '../pages/task-today/task-today';
+import { TaskSomewhenPage } from '../pages/task-somewhen/task-somewhen';
+import { TaskOnholdPage } from '../pages/task-onhold/task-onhold';
+import { TaskDonePage } from '../pages/task-done/task-done';
+import { TaskScheduledPage } from '../pages/task-scheduled/task-scheduled';
 
 @Component({
   templateUrl: 'app.html'
@@ -24,10 +29,12 @@ export class MyApp {
     this.pages = [
       { title: 'Home', icon: 'home', component: HomePage },
       { title: 'Alle', icon: 'apps', component: AllTasksPage },
-      { title: 'Heute', icon: 'clock', component: HomePage },
-      { title: 'Markiert', icon: 'star', component: HomePage },
-      { title: 'Projekte', icon: 'folder-open', component: HomePage },
-      { title: 'Erledigt', icon: 'checkmark-circle', component: HomePage }
+      { title: 'Heute', icon: 'clock', component: TaskTodayPage },
+      { title: 'Irgendwann', icon: 'help-circle', component: TaskSomewhenPage },
+      { title: 'Warten auf', icon: 'pause', component: TaskOnholdPage },
+      { title: 'Erledigt', icon: 'checkbox-outline', component: TaskDonePage },
+      { title: 'Kalender', icon: 'calendar', component: TaskScheduledPage }
+
     ];
 
   }

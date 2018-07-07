@@ -14,5 +14,5 @@ export interface Task {
     list: List;
     project: List;
     owner: User;
-    iconType: string;
+    userses: User[];
 }

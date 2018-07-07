@@ -28,7 +28,7 @@ export class TasklistComponent implements OnInit {
   getAllTasks(): void {
     this.taskProvider.getAllTasks().subscribe(tasks => {
       this.filterHandler(tasks);
-      this.playTaskNotification(tasks.length);
+      this.playTaskNotification(this.tasks.length);
     });
   }
 
@@ -87,7 +87,7 @@ export class TasklistComponent implements OnInit {
   public filterTaskByStatusDone(tasks) {
     tasks.forEach(task => {
       if (task.status != 1) {
-        task.iconType = 'checkbox-outline';
+        //task.iconType = 'checkbox-outline';
         this.tasks.push(task);
       }
     });
@@ -96,7 +96,7 @@ export class TasklistComponent implements OnInit {
   public filterTaskByStatusUnDone(tasks) {
     tasks.forEach(task => {
       if (task.status == 1) {
-        task.iconType = 'close-circle';
+        //task.iconType = 'close-circle';
         this.tasks.push(task);
       }
     });
@@ -107,7 +107,7 @@ export class TasklistComponent implements OnInit {
     tasks.forEach(task => {
       var taskDueDate = new Date(task.dueDate);
       if (today.setHours(0, 0, 0, 0) == taskDueDate.setHours(0, 0, 0, 0)) {
-        task.iconType = 'flame';
+        //task.iconType = 'flame';
         this.tasks.push(task);
       }
     });
@@ -116,7 +116,7 @@ export class TasklistComponent implements OnInit {
   public filterTaskByDueDateSomewhen(tasks) {
     tasks.forEach(task => {
       if (task.dueDate == null) {
-        task.iconType = 'md-help';
+        //task.iconType = 'md-help';
         this.tasks.push(task);
       }
     });
@@ -125,7 +125,7 @@ export class TasklistComponent implements OnInit {
   public filterTaskByPriorityHigh(tasks) {
     tasks.forEach(task => {
       if (task.priority != 0) {
-        task.iconType = 'flash'
+        //task.iconType = 'flash'
         this.tasks.push(task);
       }
     });
@@ -149,14 +149,19 @@ export class TasklistComponent implements OnInit {
     this.taskProvider.updateTask(task).subscribe(response => {
       if (response.successful) {
         this.showAlert("Task angepasst", 'Task wurde als erledigt markiert!');
-        //Auf die rootpage zurückkehren
+        //-->Play sound
+        this.nativeAudio.play(this.openSoundArray[Math.floor(Math.random() * 3) + 0])
       } else {
         this.showAlert("Anpassung fehlgeschlagen", 'Der Task wurde nicht erfolgreich angepasst.');
+        //-->Play sound
+        this.nativeAudio.play('nexttime');
       }
     },
       error => {
         console.log(error);
         this.showAlert("Fehler", 'Beim speichern ist ein Fehler aufgetreten. ' + error);
+        //-->Play sound
+        this.nativeAudio.play('nexttime');
       });
   }
 
@@ -167,7 +172,7 @@ export class TasklistComponent implements OnInit {
       editorMode: 'edit'
     });
     //-->Play sound
-    this.nativeAudio.play(this.openSoundArray[Math.floor(Math.random() * 3) + 0])
+    this.nativeAudio.play('doyourbest');
   }
 
   deleteTask(task) {

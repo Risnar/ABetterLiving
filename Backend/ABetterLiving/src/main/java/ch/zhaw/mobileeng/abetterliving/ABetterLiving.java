@@ -103,7 +103,7 @@ public class ABetterLiving extends ResourceConfig {
             t.setOwner(u);
             t.setPriority(1);
             t.setRequiredTime(new Date());
-            t.setStatus(0);
+            t.setStatus(false);
             taskRepository.save(t);
             //Add project
             Lists p = new Lists();
@@ -118,7 +118,7 @@ public class ABetterLiving extends ResourceConfig {
             t.setOwner(u);
             t.setProject(p);
             t.setPriority(3);
-            t.setStatus(0);
+            t.setStatus(false);
             t.setRequiredTime(new Date());
             t.setDueDate(new Date());
             t.setCreationDate(new Date());
