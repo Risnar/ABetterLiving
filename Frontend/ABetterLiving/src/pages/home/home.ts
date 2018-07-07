@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Component } from '@angular/core';
 import { NavController, IonicPage, NavParams } from 'ionic-angular';
 import { User } from '../../model/user';
 import { GlobalVarsProvider } from '../../providers/global-vars/global-vars';
@@ -17,18 +16,10 @@ export class HomePage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-<<<<<<< HEAD
     private nativeAudio: NativeAudio,
     public globalVars: GlobalVarsProvider) {
     this.user = this.globalVars.getActiveUser();
-=======
-    public globalVars: GlobalVarsProvider
-  ) {
-    this.user = globalVars.getActiveUser();
-    // this.listType = globalVars.getListType();
->>>>>>> Frontend-Julian
   }
-
 
 
   ionViewDidLoad() {
