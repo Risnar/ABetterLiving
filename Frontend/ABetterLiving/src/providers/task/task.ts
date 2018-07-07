@@ -13,6 +13,8 @@ const httpOptions = {
 @Injectable()
 export class TaskProvider {
 
+  // URL ANPASSEN AN LOKALE IP
+  // private tasksUrl = 'http://localhost:8080/task';  // Standard-URL to web api
   private tasksUrl = 'http://192.168.178.142:8080/task';  // URL to web api
 
   constructor(
@@ -50,6 +52,5 @@ export class TaskProvider {
     const url = `${this.tasksUrl}/${id}`;
     return this.http.delete<SrvResponse>(url, httpOptions);
   }
-
 
 }

@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, DateTime, AlertController } from 'ionic-angular';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { Task } from '../../model/task';
-import { SrvResponse } from '../../model/srvResponse'
 import { TaskProvider } from '../../providers/task/task';
-import { isDefined } from 'ionic-angular/umd/util/util';
 import { NativeAudio } from '@ionic-native/native-audio';
 
 /**

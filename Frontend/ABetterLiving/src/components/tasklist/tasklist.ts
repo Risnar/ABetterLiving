@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Task } from '../../model/task';
 import { TaskProvider } from '../../providers/task/task';
-import { NavController, AlertController, NavParams } from 'ionic-angular';
+import { NavController, AlertController } from 'ionic-angular';
 import { NativeAudio } from '@ionic-native/native-audio';
 
 @Component({
@@ -19,8 +19,6 @@ export class TasklistComponent implements OnInit {
     public alertCtrl: AlertController,
     private taskProvider: TaskProvider,
     private nativeAudio: NativeAudio,
-    // @Input() navParams: NavParams,
-
   ) { }
 
   ngOnInit() {
@@ -52,7 +50,6 @@ export class TasklistComponent implements OnInit {
     }
   }
 
-
   public filterHandler(tasks) {
 
     switch (this.listType) {
@@ -83,7 +80,6 @@ export class TasklistComponent implements OnInit {
   public filterTaskByStatusDone(tasks) {
     tasks.forEach(task => {
       if (task.status == true) {
-        //task.iconType = 'checkbox-outline';
         this.tasks.push(task);
       }
     });
@@ -92,7 +88,6 @@ export class TasklistComponent implements OnInit {
   public filterTaskByStatusUnDone(tasks) {
     tasks.forEach(task => {
       if (task.status == false) {
-        //task.iconType = 'close-circle';
         this.tasks.push(task);
       }
     });
@@ -103,7 +98,6 @@ export class TasklistComponent implements OnInit {
     tasks.forEach(task => {
       var taskDueDate = new Date(task.dueDate);
       if (today.setHours(0, 0, 0, 0) == taskDueDate.setHours(0, 0, 0, 0)) {
-        //task.iconType = 'flame';
         this.tasks.push(task);
       }
     });
@@ -112,7 +106,6 @@ export class TasklistComponent implements OnInit {
   public filterTaskByPriorityHigh(tasks) {
     tasks.forEach(task => {
       if (task.priority != 0) {
-        //task.iconType = 'flash'
         this.tasks.push(task);
       }
     });
@@ -199,7 +192,5 @@ export class TasklistComponent implements OnInit {
       buttons: ['OK']
     }).present();
   }
-
-
 
 }

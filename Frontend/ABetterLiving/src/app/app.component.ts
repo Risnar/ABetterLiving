@@ -3,12 +3,7 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
-import { AllTasksPage } from '../pages/all-tasks/all-tasks';
-import { TaskTodayPage } from '../pages/task-today/task-today';
-import { TaskDonePage } from '../pages/task-done/task-done';
-import { TaskScheduledPage } from '../pages/task-scheduled/task-scheduled';
 
 @Component({
   templateUrl: 'app.html'
@@ -17,18 +12,6 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = LoginPage;
-
-  // pages: any[] = [
-  //   { title: 'Home', icon: 'home', component: 'HomePage' },
-  //   { title: 'Alle', icon: 'apps', component: 'AllTasksPage' },
-  //   { title: 'Heute', icon: 'clock', component: 'TaskTodayPage' },
-  //   { title: 'Erledigt', icon: 'checkbox-outline', component: 'TaskDonePage' },
-  //   { title: 'Kalender', icon: 'calendar', component: 'TaskScheduledPage' }
-  // ]
-
-  // constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
-  //   this.initializeApp();
-  // }
   pages: Array<{ title: string, icon: string, component: any }>;
 
   constructor(

@@ -15,7 +15,6 @@ import { HomePageModule } from '../pages/home/home.module';
 import { AllTasksPageModule } from '../pages/all-tasks/all-tasks.module';
 import { TaskEditorPageModule } from '../pages/task-editor/task-editor.module';
 import { NativeAudio } from '@ionic-native/native-audio';
-// import { SmartAudioProvider } from '../providers/smart-audio/smart-audio';
 import { TaskDonePageModule } from '../pages/task-done/task-done.module';
 import { TaskTodayPageModule } from '../pages/task-today/task-today.module';
 import { TaskScheduledPageModule } from '../pages/task-scheduled/task-scheduled.module';
