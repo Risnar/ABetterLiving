@@ -13,7 +13,7 @@ const httpOptions = {
 @Injectable()
 export class TaskProvider {
 
-  private tasksUrl = 'http://localhost:8080/task';  // URL to web api
+  private tasksUrl = 'http://192.168.178.142:8080/task';  // URL to web api
 
   constructor(
     public http: HttpClient

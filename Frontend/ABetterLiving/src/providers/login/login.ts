@@ -7,7 +7,9 @@ import { AuthToken } from '../../model/authToken';
 @Injectable()
 export class LoginProvider {
 
-  private authserviceUrl = 'http://localhost:8080';  // URL to web api
+  // URL ANPASSEN AN LOKALE IP
+  // private authserviceUrl = 'http://localhost:8080';  // Standard-URL to web api
+  private authserviceUrl = 'http://192.168.178.142:8080';  // URL to web api
 
   constructor(
     public http: HttpClient

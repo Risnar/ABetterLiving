@@ -20,7 +20,7 @@ export class TasklistComponent implements OnInit {
     private taskProvider: TaskProvider,
     private nativeAudio: NativeAudio,
     // @Input() navParams: NavParams,
-    
+
   ) { }
 
   ngOnInit() {
@@ -65,24 +65,12 @@ export class TasklistComponent implements OnInit {
       case 'Unerledigt':
         this.filterTaskByStatusUnDone(tasks);
         break;
-      // case 'Irgendwann':
-      //   this.filterTaskByDueDateSomewhen(tasks);
-      //   break;
       case 'Heute':
         this.filterTaskByDueDateToday(tasks);
         break;
-      // case 'Wichtig':
-      //   this.filterTaskByPriorityHigh(tasks);
-      //   break;
       case 'Kalender':
         this.filterTaskByPriorityHigh(tasks);
         break;
-      // case 'Unsortiert':
-      //   // TODO
-      //   break;
-      // case 'Warten auf':
-      //   // abhängig von anderem User
-      //   break;
     }
   }
 
@@ -121,15 +109,6 @@ export class TasklistComponent implements OnInit {
     });
   }
 
-  // public filterTaskByDueDateSomewhen(tasks) {
-  //   tasks.forEach(task => {
-  //     if (task.dueDate == null) {
-  //       //task.iconType = 'md-help';
-  //       this.tasks.push(task);
-  //     }
-  //   });
-  // }
-
   public filterTaskByPriorityHigh(tasks) {
     tasks.forEach(task => {
       if (task.priority != 0) {
@@ -138,7 +117,6 @@ export class TasklistComponent implements OnInit {
       }
     });
   }
-
 
   public openTaskEditor() {
     this.navCtrl.push('TaskEditorPage', {
@@ -151,7 +129,6 @@ export class TasklistComponent implements OnInit {
   }
 
   setTaskToDone(task) {
-    // task.status = false ? true : false;
     if (task.status === false) {
       task.status = true;
     } else if (task.status === true) {
@@ -160,6 +137,11 @@ export class TasklistComponent implements OnInit {
 
     this.taskProvider.updateTask(task).subscribe(response => {
       if (response.successful) {
+        //Entfernt den task aus dem tasklist array welches vom parent übergeben wurde.
+        if (this.tasks !== undefined) {
+          const idx = this.tasks.indexOf(task);
+          this.tasks.splice(idx, 1);
+        }
         this.showAlert("Task angepasst", 'Task wurde als erledigt markiert!');
         //-->Play sound
         this.nativeAudio.play(this.openSoundArray[Math.floor(Math.random() * 3) + 0])
@@ -190,7 +172,7 @@ export class TasklistComponent implements OnInit {
   deleteTask(task) {
     this.taskProvider.deleteTask(task).subscribe(response => {
       if (response.successful) {
-        this.showAlert("Löschen fehlgeschlagen", 'Der Task wurde erfolgreich gelöscht.');
+        this.showAlert("Löschen erfolgreich", 'Der Task wurde erfolgreich gelöscht.');
         //Entfernt den task aus dem tasklist array welches vom parent übergeben wurde.
         const idx = this.tasks.indexOf(task);
         this.tasks.splice(idx, 1);

@@ -6,15 +6,16 @@
 <ion-list>
     <ion-item-sliding *ngFor="let task of tasks">
         <ion-item>
-            <!-- <ion-icon *ngIf="this.navCtrl.getActive() === 'home'" name="close-circle" item-start></ion-icon>
-            <ion-icon *ngIf="navCtrl.getActive() === '/#/all-tasks'" name="checkbox-circle" item-start></ion-icon> -->
+            <!-- <ion-icon *ngIf="page === home" name="close-circle" item-start></ion-icon> -->
+            <!-- <ion-icon *ngIf="page === all-tasks" name="checkbox-circle" item-start></ion-icon> -->
+
+            <!-- <ion-icon *ngIf="this.navCtrl.getActive() === 'home'" name="close-circle" item-start></ion-icon> -->
+            <!-- <ion-icon *ngIf="navCtrl.getActive() === all-tasks" name="checkbox-circle" item-start></ion-icon> -->
             <!-- <ion-icon *ngIf="rootpage === task-done" name="checkbox-outline" item-start></ion-icon>
             <ion-icon *ngIf="rootpage === task-today" name="flame" item-start></ion-icon>
             <ion-icon *ngIf="rootpage === task-scheduled" name="calendar" item-start></ion-icon> -->
             <h2>{{task.title}}</h2>
             <p>{{task.note}}</p>
-            <p>{{task.status}}</p>
-
         </ion-item>
         <ion-item-options side="right">
             <button *ngIf="task.status === false" ion-button color="secondary" (click)="setTaskToDone(task)">
